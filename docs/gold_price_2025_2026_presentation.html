@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Price Analysis 2025-2026: The $4,000 Era</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d2d5f 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 40px;
+            position: absolute;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            display: block;
+        }
+
+        .slide.slide-out {
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        h1 {
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffcc00, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.3em;
+            margin-bottom: 25px;
+            color: #ffd700;
+            border-bottom: 3px solid rgba(255, 215, 0, 0.4);
+            padding-bottom: 12px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+        }
+
+        h3 {
+            font-size: 1.7em;
+            margin: 20px 0 15px 0;
+            color: #ffed4e;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.4em;
+            opacity: 0.85;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .data-card {
+            background: rgba(255, 215, 0, 0.08);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .data-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .data-card:hover::before {
+            left: 100%;
+        }
+
+        .data-number {
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #ffd700;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .data-label {
+            font-size: 0.95em;
+            opacity: 0.8;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        th {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transition: background 0.3s ease;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-btn {
+            padding: 12px 28px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            color: #1a1a3a;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            min-width: 120px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .slide-indicators {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 20px 15px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .indicator.active {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            transform: scale(1.6);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+
+        .chart {
+            height: 300px;
+            background: linear-gradient(to right, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border-radius: 12px;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.05) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        .bar {
+            background: linear-gradient(to top, #ffd700, #ffed4e, #ffd700);
+            width: 70px;
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            animation: growBar 1.5s ease-out;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .bar:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9em;
+            text-align: center;
+            font-weight: bold;
+            color: #ffed4e;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1em;
+            font-weight: bold;
+            color: #ffd700;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+
+        @keyframes growBar {
+            from { height: 0; opacity: 0; }
+            to { height: var(--bar-height); opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .pulse {
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .trend-arrow {
+            display: inline-block;
+            font-size: 1.3em;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .trend-up { color: #00ff88; }
+        .trend-down { color: #ff4444; }
+        .trend-flat { color: #ffed4e; }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        li::before {
+            content: "▶";
+            color: #ffd700;
+            position: absolute;
+            left: -20px;
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        .forecast-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .forecast-card::before {
+            content: '⚡';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+            opacity: 0.3;
+            color: #ffd700;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .metric {
+            background: rgba(255, 215, 0, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 1.9em; }
+            .slide { padding: 25px; margin: 15px; }
+            .data-grid { grid-template-columns: 1fr; }
+            .navigation { bottom: 20px; padding: 12px 20px; bottom: 15px; }
+            .slide-indicators { right: 15px; }
+            .chart { height: 250px; padding: 20px; }
+            .bar { width: 55px; }
+            .data-number { font-size: 2.3em; }
+        }
+
+        @media (max-width: 480px) {
+            .navigation { flex-direction: column; gap: 10px; }
+            .nav-btn { min-width: 100px; padding: 10px 20px; }
+            h1 { font-size: 2.3em; }
+            .bar { width: 45px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>Gold Price Analysis 2025-2026</h1>
+            <div class="subtitle">
+                The $4,000 Era: Breaking Historic Barriers<br>
+                Comprehensive Market Insights & Outlook
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <div class="highlight pulse" style="font-size: 1.6em; margin: 25px 0;">
+                    "From Barrier to Baseline: The Golden Transformation Unfolds"
+                </div>
+                <div style="opacity: 0.8; margin: 25px 0;">
+                    <p><strong>Analysis Period:</strong> May 2025 - October 2025</p>
+                    <p><strong>Forecast Period:</strong> November 2025 - February 2026</p>
+                    <p><strong>Generated:</strong> November 13, 2025</p>
+                </div>
+            </div>
+
+            <div class="data-grid" style="margin-top: 50px;">
+                <div class="data-card fade-in">
+                    <div class="data-number">$4,381</div>
+                    <div class="data-label">All-Time High (Oct 20, 2025)</div>
+                    <small>Historic $4,000+ breakthrough</small>
+                </div>
+                <div class="data-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="data-number">+52%</div>
+                    <div class="data-label">Year-to-Date Performance</div>
+                    <small>Record-breaking annual advance</small>
+                </div>
+                <div class="data-card fade-in" style="animation-delay: 0.4s;">
+                    <div class="data-number">750t</div>
+                    <div class="data-label">Central Bank Accumulation</div>
+                    <small>Annual rate 2025</small>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; opacity: 0.6; font-size: 0.9em;">
+                <p>🚀 Use navigation buttons or indicators to explore the analysis</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Historic Rally -->
+        <div class="slide">
+            <h2>The Historic Rally: May-November 2025</h2>
+            <div class="fade-in">
+                <p class="highlight" style="font-size: 1.3em; line-height: 1.7; text-align: center; margin-bottom: 30px;">
+                    Gold achieved an extraordinary milestone in 2025, smashing through the <span class="highlight">$4,000 barrier for the first time</span> and setting a new all-time high of $4,381 per ounce in October 2025.
+                </p>
+
+                <div class="chart-container">
+                    <h3>Monthly Price Performance Journey to $4,000+</h3>
+                    <div class="chart">
+                        <div class="bar" style="--bar-height: 200px;" data-tooltip="May: Starting Point">
+                            <div class="bar-value">$3,310</div>
+                            <div class="bar-label">May</div>
+                        </div>
+                        <div class="bar" style="--bar-height: 210px;" data-tooltip="June: +1.3%">
+                            <div class="bar-value">$3,353</div>
+                            <div class="bar-label">Jun <trend class="trend-up">▲+1.3%</trend></div>
+                        </div>
+                        <div class="bar" style="--bar-height: 205px;" data-tooltip="July: -0.4%">
+                            <div class="bar-value">$3,340</div>
+                            <div class="bar-label">Jul <trend class="trend-down">▼-0.4%</trend></div>
+                        </div>
+                        <div class="bar" style="--bar-height: 220px;" data-tooltip="August: +0.8%">
+                            <div class="bar-value">$3,368</div>
+                            <div class="bar-label">Aug <trend class="trend-up">▲+0.8%</trend></div>
+                        </div>
+                        <div class="bar" style="--bar-height: 280px;" data-tooltip="September: +8.9%">
+                            <div class="bar-value">$3,668</div>
+                            <div class="bar-label">Sep <trend class="trend-up">▲+8.9%</trend></div>
+                        </div>
+                        <div class="bar" style="--bar-height: 350px;" data-tooltip="October: +10.7% +$4,000 Breakthrough!">
+                            <div class="bar-value">$4,059&lt;</div>
+                            <div class="bar-label">Oct 🎯<trend class="trend-up">▲+10.7%</trend></div>
+                        </div>
+                        <div class="bar" style="--bar-height: 360px;" data-tooltip="November: +2.2% Consolidation">
+                            <div class="bar-value">$4,150</div>
+                            <div class="bar-label">Nov <trend class="trend-up">▲+2.2%</trend></div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; opacity: 0.8;">
+                        The September-October acceleration marked gold's most dramatic advancement since the 1970s, with the psychological significance of breaking $4,000 representing market transformation.
+                    </p>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-card">
+                        <div class="data-number">10.7%</div>
+                        <div class="data-label">October Monthly Gain</div>
+                        <small>Historic $4,000+ breakthrough month</small>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number">Oct 20</div>
+                        <div class="data-label">$4,381 ATH Date</div>
+                        <small>Milestone achievement day</small>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number">
+                            <span class="trend-up">$4,000</span>
+                        </div>
+                        <div class="data-label">New Baseline</div>
+                        <small>Institutionally recognized support level</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The $4,000+ Transformation -->
+        <div class="slide">
+            <h2>The $4,000+ Transformation</h2>
+            <div class="fade-in">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+                    <div class="chart-container">
+                        <h3>Central Bank Revolution</h3>
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <div class="metric-value">750-900t</div>
+                                <div class="metric-label">2025 Annual Rate</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">30%+</div>
+                                <div class="metric-label">of Total Demand</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">2.5x</div>
+                                <div class="metric-label">Pre-2022 Average</div>
+                            </div>
+                        </div>
+                        <ul style="margin-top: 20px;">
+                            <li>China: 11 consecutive months (+67t)</li>
+                            <li>Poland: Aggressive 67t addition in 2025</li>
+                            <li>EM Central Banks: UAE, Qatar, Iran, Uganda joining</li>
+                            <li>Price-insensitive strategic accumulation</li>
+                        </ul>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Institutional Renaissance</h3>
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <div class="metric-value">$8.2B</div>
+                                <div class="metric-label">October 2025 ETF Inflows</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">5 Months</div>
+                                <div class="metric-label">Consecutive Inflow Streak</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">$6.5B</div>
+                                <div class="metric-label">North American ETF Flow</div>
+                            </div>
+                        </div>
+                        <ul style="margin-top: 20px;">
+                            <li>Pension funds implementing 5-10% targets</li>
+                            <li>Insurance expanding PM allocations</li>
+                            <li>Institutional surveys showing strategic adoption</li>
+                            <li>Retail following institutional lead</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <h3 style="margin-top: 0;">🚨 Critical Transformation Factors</h3>
+                    <ul>
+                        <li><strong>Federal Reserve Policy Revolution:</strong> Sept 2025 pivot with 63-70% chance of December cut</li>
+                        <li><strong>Physical Market Transformation:</strong> India regaining premium, China discount narrowing</li>
+                        <li><strong>Currency Debasement Premium:</strong> Global recognition of CBDC/debasement risks</li>
+                        <li><strong>Geopolitical Re-Allocation:</strong> Strategic positioning against sanctions USD risks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Technical Architecture of $4,000+ -->
+        <div class="slide">
+            <h2>Technical Architecture of $4,000+ Era</h2>
+            <div class="fade-in">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div class="chart-container">
+                        <h3>🏗️ Support Infrastructure</h3>
+                        <table>
+                            <tr><th>Level</th><th>Significance</th><th>Technical Role</th></tr>
+                            <tr><td class="highlight">$4,200</td><td>$4,200 gateway</td><td>Final resistance before ATH</td></tr>
+                            <tr><td class="highlight">$4,114-$4,124</td><td>23.6% Fib</td><td>Immediate support line</td></tr>
+                            <tr><td class="highlight">$4,050-$4,059</td><td>Breakout level</td><td>Round number support</td></tr>
+                            <tr><td class="highlight">$4,000</td><td>Psychological</td><td>Bullish invalidation level</td></tr>
+                            <tr><td class="highlight">$3,980-$3,990</td><td>50-day MA</td><td>Dynamic support cluster</td></tr>
+                            <tr><td class="highlight">$3,890-$3,900</td><td>Critical trend</td><td>Rising support line</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>🎯 Resistance Architecture</h3>
+                        <table>
+                            <tr><th>Level</th><th>Technical Role</th><th>Significance</th></tr>
+                            <tr><td class="highlight">$4,190-$4,200</td><td>October spike</td><td>Daily close gateway</td></tr>
+                            <tr><td class="highlight">$4,250-$4,255</td><td>Fib extension</td><td>Major resistance cluster</td></tr>
+                            <tr><td class="highlight">$4,382</td><td>All-time high</td><td>Final supply zone</td></tr>
+                            <tr><td class="highlight">$4,400-$4,440</td><td>Equal-wave target</td><td>Gann angle projection</td></tr>
+                            <tr><td class="highlight">$4,500</td><td>Stretch target</td><td>Morgan Stanley 2026</td></tr>
+                            <tr><td class="highlight">$5,000</td><td>Institutional consensus</td><td>Major bank target zone</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="chart-container" style="margin-top: 25px;">
+                    <h3>📊 Current Technical Reading (November 2025)</h3>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <div class="metric-value">60-63</div>
+                            <div class="metric-label">14-day RSI</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$3,980</div>
+                            <div class="metric-label">50-day MA</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$3,640</div>
+                            <div class="metric-label">100-day MA</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$4,000+</div>
+                            <div class="metric-label">New Baseline</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forecast-card" style="margin-top: 20px;">
+                    <h4>🇺🇸 Key TBond Rate Movement & Positioning Risk</h4>
+                    <p><strong>Commitment of Traders Data:</strong> Net-long positions at 3-month high (69k contracts) - elevated but not extreme positioning leaves room for volatile corrections if Fed policy disappoints expectations.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Wall Street $5,000 Consensus -->
+        <div class="slide">
+            <h2>The Wall Street $5,000 Consensus</h2>
+            <div class="fade-in">
+                <table style="margin-bottom: 30px;">
+                    <tr><th>Institution</th><th>Short-Term</th><th>2026 Peak Target</th><th>Methodology</th></tr>
+                    <tr>
+                        <td><strong>JP Morgan</strong></td>
+                        <td class="highlight">$4,200-$4,400</td>
+                        <td class="highlight">$5,055 (Q4 2026)</td>
+                        <td>Flow + CB accumulation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bank of America</strong></td>
+                        <td class="highlight">$4,300</td>
+                        <td class="highlight">$5,000</td>
+                        <td>Demand + Fed policy model</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Morgan Stanley</strong></td>
+                        <td class="highlight">$4,200</td>
+                        <td class="highlight">$4,500 → $6,000 (2028)</td>
+                        <td>Technical momentum chain</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HSBC</strong></td>
+                        <td class="highlight">$4,250</td>
+                        <td class="highlight">$5,000 (end-2026)</td>
+                        <td>Macro framework</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ING</strong></td>
+                        <td class="highlight">$4,100 (Q1 2026)</td>
+                        <td class="highlight">$4,700</td>
+                        <td>Seasonal + policy analysis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Goldman Sachs</strong></td>
+                        <td class="highlight">$4,500</td>
+                        <td class="highlight">$5,055</td>
+                        <td>Commodity cycle analysis</td>
+                    </tr>
+                </table>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                    <div class="chart-container">
+                        <h3>📈 Target Achievement Probability</h3>
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <div class="metric-value">70%</div>
+                                <div class="metric-label">$4,200-$4,400<br>Dec 2025</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">60%</div>
+                                <div class="metric-label">$5,000<br>Q4 2026</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">45%</div>
+                                <div class="metric-label">$6,000+<br>2027-2028</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>🔥 Key Bullish Drivers</h3>
+                        <ul>
+                            <li><strong>Central Bank Buying:</strong> 760t annually projected</li>
+                            <li><strong>Fed Policy Accommodation:</strong> 63-70% December cut odds</li>
+                            <li><strong>ETF Renaissance:</strong> $8.2B October inflows</li>
+                            <li><strong>Currency Debasement:</strong> Negative real yield environment</li>
+                            <li><strong>Geopolitical Premium:</strong> Trade wars + sanctions risk</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Risk-Return Assessment -->
+        <div class="slide">
+            <h2>Risk-Return Assessment Matrix</h2>
+            <div class="fade-in">
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h3 style="color: #00ff88; margin-bottom: 15px;">🚀 Upside Catalysts</h3>
+                        <ul style="text-align: left; margin: 0;">
+                            <li>US Gov't shutdown extensions</li>
+                            <li>Dollar index below 100</li>
+                            <li>Central bank >900t purchase pace</li>
+                            <li>ETF flows >$10B annually</li>
+                            <li>Major bank crisis interventions</li>
+                            <li>Weekly closes above $4,250</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-card">
+                        <h3 style="color: #ff4444; margin-bottom: 15px;">⚠️ Downside Risks</h3>
+                        <ul style="text-align: left; margin: 0;">
+                            <li>Fed hawkish pivot delaying cuts</li>
+                            <li>Dollar strength above 110 index</li>
+                            <li>CB selling/reduced accumulation</li>
+                            <li>50% YTD profit-taking</li>
+                            <li>Technical breakdown <$4,000</li>
+                            <li>Holiday liquidity reduction</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-card">
+                        <h3 style="color: #ffed4e; margin-bottom: 15px;">📊 Base Case Scenario</h3>
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <div class="metric-value">65%</div>
+                                <div class="metric-label">Probability</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">$4,275</div>
+                                <div class="metric-label">Average Target</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">22-28%</div>
+                                <div class="metric-label">Volatility</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <h3 style="margin-top: 0;">🎯 Positioning Risk Assessment</h3>
+                    <p>Current elevated but not extreme positioning (69k COT net-long vs 126k 3-month high) leaves room for volatile corrections if Fed policy disappoints expectations. Monitor COT data closely alongside technical indicators.</p>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Expected Range Through February 2026</h3>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <div class="metric-value" style="color: #00ff88;">$4,450</div>
+                            <div class="metric-label" style="font-size: 1em;">High Target</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$4,150</div>
+                            <div class="metric-label" style="font-size: 1em;">Averages $4,150</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" style="color: #ff4444;">$4,050</div>
+                            <div class="metric-label" style="font-size: 1em;">Low Target</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: 4-Month Outlook -->
+        <div class="slide">
+            <h2>4-Month Outlook: Nov 2025 - Feb 2026</h2>
+            <div class="fade-in">
+                <div class="chart-container">
+                    <h3>🗓️ Monthly Breakdown Analysis</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0;">
+                        <div class="forecast-card" style="border-color: rgba(255, 215, 0, 0.5);">
+                            <h4 style="margin-top: 0; color: #ffd700;">November 2025</h4>
+                            <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="metric">
+                                    <div class="metric-value">$4,100-200</div>
+                                    <div class="metric-label">Expected Range</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">Nov 26</div>
+                                    <div class="metric-label">PCE Deflator</div>
+                                </div>
+                            </div>
+                            <ul style="margin: 15px 0; font-size: 0.9em;">
+                                <li>Consolidation post-$4,000 breakthrough</li>
+                                <li>US PCE deflator data impact</li>
+                                <li>Diwali demand tail-effect</li>
+                            </ul>
+                        </div>
+
+                        <div class="forecast-card" style="border-color: rgba(255, 215, 0, 0.6);">
+                            <h4 style="margin-top: 0; color: #ffd700;">December 2025</h4>
+                            <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="metric">
+                                    <div class="metric-value">$4,200-350</div>
+                                    <div class="metric-label">Expected Range</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">Dec 18</div>
+                                    <div class="metric-label">FOMC Date</div>
+                                </div>
+                            </div>
+                            <ul style="margin: 15px 0; font-size: 0.9em;">
+                                <li>Critical FOMC meeting (potential cut)</li>
+                                <li>Year-end institutional rebalancing</li>
+                                <li>Major options expiry (Dec 20)</li>
+                            </ul>
+                        </div>
+
+                        <div class="forecast-card" style="border-color: rgba(255, 215, 0, 0.7);">
+                            <h4 style="margin-top: 0; color: #ffd700;">January 2026</h4>
+                            <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="metric">
+                                    <div class="metric-value">$4,200-400</div>
+                                    <div class="metric-label">Expected Range</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">Jan 29</div>
+                                    <div class="metric-label">Chinese New Year</div>
+                                </div>
+                            </div>
+                            <ul style="margin: 15px 0; font-size: 0.9em;">
+                                <li>Fresh institutional allocation</li>
+                                <li>Potential $4,400+ breakout with volume</li>
+                                <li>Chinese New Year physical demand</li>
+                            </ul>
+                        </div>
+
+                        <div class="forecast-card" style="border-color: rgba(255, 215, 0, 0.8);">
+                            <h4 style="margin-top: 0; color: #ffd700;">February 2026</h4>
+                            <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="metric">
+                                    <div class="metric-value">$4,250-450</div>
+                                    <div class="metric-label">Expected Range</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">Q4 2025</div>
+                                    <div class="metric-label">Data Releases</div>
+                                </div>
+                            </div>
+                            <ul style="margin: 15px 0; font-size: 0.9em;">
+                                <li>Seasonal pattern analysis</li>
+                                <li>Potential ATH level testing</li>
+                                <li>2026 trend establishment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <h3>🎯 Base Case: 65% Probability - $4,275 Average Target Through February 2026</h3>
+                    <p>Key driver: Sustained Fed accommodation maintaining negative real yields + continued central bank accumulation patterns + institutional portfolio reallocation trends.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Investment Strategy Framework -->
+        <div class="slide">
+            <h2>Investment Strategy Framework</h2>
+            <div class="fade-in">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 30px;">
+                    <div class="forecast-card">
+                        <h3 style="color: #00ff88; margin-bottom: 15px;">Conservative Investors</h3>
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <div class="metric-value">15-20%</div>
+                                <div class="metric-label">Portfolio Weight</div>
+                            </div>
+                        </div>
+                        <ul style="margin-top: 15px; font-size: 0.95em;">
+                            <li>Physical bullion allocations</li>
+                            <li>Allocated storage accounts</li>
+                            <li>Wealth preservation focus</li>
+                            <li>Dollar-cost averaging approach</li>
+                        </ul>
+                    </div>
+
+                    <div class="forecast-card">
+                        <h3 style="color: #ffed4e; margin-bottom: 15px;">Moderate Growth</h3>
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <div class="metric-value">20-30%</div>
+                                <div class="metric-label">Portfolio Weight</div>
+                            </div>
+                        </div>
+                        <ul style="margin-top: 15px; font-size: 0.95em;">
+                            <li>Diversified ETFs + futures</li>
+                            <li>Mining equity allocations</li>
+                            <li>Inflation protection focus</li>
+                            <li>3-5 scaling programs</li>
+                        </ul>
+                    </div>
+
+                    <div class="forecast-card">
+                        <h3 style="color: #ff4444; margin-bottom: 15px;">High-Growth Speculative</h3>
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <div class="metric-value">30-40%</div>
+                                <div class="metric-label">Portfolio Weight</div>
+                            </div>
+                        </div>
+                        <ul style="margin-top: 15px; font-size: 0.95em;">
+                            <li>Leveraged ETFs & options</li>
+                            <li>Junior mining exposure</li>
+                            <li>Crypto-gold hybrids</li>
+                            <li>Maximum volatility strategies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>🎯 Entry/Exit Strategy Framework</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                        <div>
+                            <h4 style="color: #00ff88;">📈 Long Position Strategy</h4>
+                            <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #00ff88;">$4,050-090</div>
+                                    <div class="metric-label">Buy Dips Entry</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #ffed4e;">>$4,250</div>
+                                    <div class="metric-label">Momentum Entry</div>
+                                </div>
+                            </div>
+                            <div style="padding: 15px; background: rgba(0, 255, 136, 0.1); border-radius: 10px; margin-top: 15px;">
+                                <strong>Targets:</strong> $4,350 → $4,400 → $4,450+<br>
+                                <strong>Stop:</strong> $3,980 (50-day MA)
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #ff4444;">📉 Hedge/Short Strategy</h4>
+                            <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #ff4444;">$4,300-350</div>
+                                    <div class="metric-label">Fade Entry</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #ff8888;">$4,380+</div>
+                                    <div class="metric-label">Reversal Entry</div>
+                                </div>
+                            </div>
+                            <div style="padding: 15px; background: rgba(255, 68, 68, 0.1); border-radius: 10px; margin-top: 15px;">
+                                <strong>Targets:</strong> $4,120 → $4,050 → $3,990<br>
+                                <strong>Stop:</strong> $4,350 (Oct swing)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <h4>🌍 Geographic Storage Distribution</h4>
+                    <div class="data-grid" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="data-card" style="margin: 0; background: rgba(255, 215, 0, 0.05);">
+                            <div class="metric-value" style="font-size: 1.5em;">30%</div>
+                            <div class="data-label">Western (Swiss, Canada, SG)</div>
+                        </div>
+                        <div class="data-card" style="margin: 0; background: rgba(255, 215, 0, 0.05);">
+                            <div class="metric-value" style="font-size: 1.5em;">25%</div>
+                            <div class="data-label">US-based Storage</div>
+                        </div>
+                        <div class="data-card" style="margin: 0; background: rgba(255, 215, 0, 0.05);">">
+                            <div class="metric-value" style="font-size: 1.5em;">25%</div>
+                            <div class="data-label">Asian (HK, Australia)</div>
+                        </div>
+                        <div class="data-card" style="margin: 0; background: rgba(255, 215, 0, 0.05);">
+                            <div class="metric-value" style="font-size: 1.5em;">20%</div>
+                            <div class="data-label">EM + Crypto-Hybrid</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Final Thesis -->
+        <div class="slide">
+            <h2>Final Investment Thesis: The New Paradigm</h2>
+            <div class="fade-in">
+                <div class="highlight" style="font-size: 1.5em; text-align: center; margin: 30px 0; line-height: 1.7;">
+                    "$4,000 represents structural transformation rather than cyclical excess - the convergence of monetary accommodation, unprecedented central bank demand, and institutional reallocation has created a new baseline for precious metals valuation."
+                </div>
+
+                <div class="forecast-card">
+                    <h3 style="margin-top: 0;">🎯 Core Strategic Recommendation</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; align-items: start;">
+                        <div>
+                            <h4 style="color: #ffd700;">Base Case (65%): $4,275 Average Target - February 2026</h4>
+                            <ul>
+                                <li>Sustained Fed accommodation + negative real yields</li>
+                                <li>Continued CB accumulation above 750 tonnes</li>
+                                <li>Institutional portfolio reallocation momentum</li>
+                                <li>Technical momentum + volume confirmation</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: #ffd700;">Stretch Case (35%): $4,450+ Potential</h4>
+                            <ul>
+                                <li>Emerging monetary crisis scenarios</li>
+                                <li>Accelerated Fed policy accommodation</li>
+                                <li>Record ETF + physical demand</li>
+                                <li>Mathematical path to $5,000+ targets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-card">
+                        <div class="data-number" style="color: #00ff88;">$4,275</div>
+                        <div class="data-label">Base Case Target</div>
+                        <small>February 2026 average</small>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number">
+                            <span class="trend-up">$5,000</span>
+                        </div>
+                        <div class="data-label">2026 Stretch Target</div>
+                        <small>Institutional consensus</small>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-number">15-25%</div>
+                        <div class="data-label">Recommended Allocation</div>
+                        <small>Portfolio weighting</small>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>🚀 Implementation Framework</h3>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <div class="metric-value" style="color: #00ff88;">Buy</div>
+                            <div class="metric-label">$4,050-$4,090</div>
+                            <small style="opacity: 0.7;">Dip buying strategy</small>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" style="color: #ffed4e;">>$4,250</div>
+                            <div class="metric-label">Momentum Entry</div>
+                            <small style="opacity: 0.7;">Breakout confirmation</small>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" style="color: #ff4444;">$4,050</div>
+                            <div class="metric-label">Stop-Loss</div>
+                            <small style="opacity: 0.7;">Risk management</small>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$4,450</div>
+                            <div class="metric-label">Primary Target</div>
+                            <small style="opacity: 0.7;">February 2026</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forecast-card" style="border-color: rgba(255, 215, 0, 0.6);">
+                    <h4 style="margin-bottom: 15px;">🌟 Final Insight</h4>
+                    <p style="margin-bottom: 15px;">
+                        The golden transformation of 2025 has established foundations for what may prove to be the most significant precious metals bull market in modern financial history. The achievement of $4,000+ levels represents structural transition to a new monetary paradigm rather than cyclical excess.
+                    </p>
+                    <div style="text-align: center; font-size: 1.1em;" class="highlight">
+                        "Tactical discipline and strategic patience will prove essential for capitalizing on this extraordinary monetary transformation."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <!-- Slide Indicators -->
+    <div class="slide-indicators" id="indicators">
+        <div class="indicator active" onclick="goToSlide(1)" title="Title Slide"></div>
+        <div class="indicator" onclick="goToSlide(2)" title="Historic Rally"></div>
+                        <div class="indicator" onclick="goToSlide(3)" title="$4,000+ Transformation"></div>
+        <div class="indicator" onclick="goToSlide(4)" title="Technical Analysis"></div>
+        <div class="indicator" onclick="goToSlide(5)" title="$5,000 Consensus"></div>
+        <div class="indicator" onclick="goToSlide(6)" title="Risk Assessment"></div>
+        <div class="indicator" onclick="goToSlide(7)" title="4-Month Outlook"></div>
+        <div class="indicator" onclick="goToSlide(8)" title="Strategy Framework"></div>
+        <div class="indicator" onclick="goToSlide(9)" title="Final Thesis"></div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 9;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Hide current slide with animation
+            slides[currentSlide - 1].classList.add('slide-out');
+            setTimeout(() => {
+                slides[currentSlide - 1].classList.remove('active');
+                slides[currentSlide - 1].classList.remove('slide-out');
+            }, 300);
+
+            // Update current slide
+            currentSlide = n;
+            if (currentSlide > totalSlides) currentSlide = 1;
+            if (currentSlide < 1) currentSlide = totalSlides;
+
+            // Show new slide
+            setTimeout(() => {
+                slides[currentSlide - 1].classList.add('active');
+            }, 300);
+
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide - 1);
+            });
+
+            // Update navigation buttons
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        function goToSlide(slideNumber) {
+            showSlide(slideNumber);
+        }
+
+        // Keyboard navigation with better event handling
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            const keyMap = {
+                'ArrowRight': () => changeSlide(1),
+                'ArrowLeft': () => changeSlide(-1),
+                ' ': () => changeSlide(1),
+                'Space': () => changeSlide(1),
+                'Home': () => goToSlide(1),
+                'End': () => goToSlide(totalSlides),
+                'PageUp': () => changeSlide(-1),
+                'PageDown': () => changeSlide(1)
+            };
+
+            if (keyMap[e.key]) {
+                e.preventDefault();
+                keyMap[e.key]();
+            }
+        });
+
+        // Enhanced touch/swipe support with better gesture detection
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchTime = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            const touch = e.changedTouches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchTime = Date.now();
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const touch = e.changedTouches[0];
+            const touchEndX = touch.clientX;
+            const touchEndY = touch.clientY;
+            const touchEndTime = Date.now();
+
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            const deltaTime = touchEndTime - touchTime;
+
+            // Only trigger if it's a quick gesture and mostly horizontal
+            if (deltaTime < 300 && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX < 0) {
+                    changeSlide(1);
+                } else {
+                    changeSlide(-1);
+                }
+            }
+        });
+
+        // Initialize presentation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to bar charts
+            const bars = document.querySelectorAll('.bar');
+            setTimeout(() => {
+                bars.forEach((bar, index) => {
+                    setTimeout(() => {
+                        bar.style.opacity = '1';
+                    }, index * 100);
+                });
+            }, 500);
+
+            // Show first slide
+            showSlide(1);
+
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1s ease-in-out';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Enhanced bar hover effects and tooltips
+        document.querySelectorAll('.bar').forEach(bar => {
+            bar.addEventListener('mouseenter', function() {
+                this.setAttribute('title', this.dataset.tooltip || 'Click for more details');
+            });
+        });
+
+        // Auto-advance slides (optional, can be disabled)
+        let autoAdvanceTimer;
+        let autoAdvanceEnabled = false;
+
+        function toggleAutoAdvance() {
+            autoAdvanceEnabled = !autoAdvanceEnabled;
+            if (autoAdvanceEnabled) {
+                autoAdvanceTimer = setInterval(() => changeSlide(1), 15000);
+            } else {
+                clearInterval(autoAdvanceTimer);
+            }
+        }
+
+        // Pause auto-advance on interaction
+        document.addEventListener('click', () => {
+            if (autoAdvanceEnabled) {
+                clearInterval(autoAdvanceTimer);
+                autoAdvanceTimer = setInterval(() => changeSlide(1), 15000);
+            }
+        });
+
+        // Add rich animations for slide transitions
+        function addSlideAnimation(slide) {
+            const elements = slide.querySelectorAll('.data-card, .metric, .bar');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease-out';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100 + 200);
+            });
+        }
+
+        // Monitor slide changes to apply animations
+        let observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active')) {
+                        setTimeout(() => addSlideAnimation(target), 100);
+                    }
+                }
+            });
+        });
+
+        // Start observing
+        document.querySelectorAll('.slide').forEach(slide => {
+            observer.observe(slide, { attributes: true });
+        });
+
+        // Performance optimization
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                showSlide(currentSlide);
+            }, 250);
+        });
+    </script>
+</body>
+</html>
