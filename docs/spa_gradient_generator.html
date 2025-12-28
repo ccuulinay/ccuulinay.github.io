@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Wave Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .gradient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.8s ease-in-out;
+        }
+
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .color-shape {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 25s ease-in-out infinite;
+            mix-blend-mode: screen;
+        }
+
+        .color-shape:nth-child(1) {
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+
+        .color-shape:nth-child(2) {
+            animation-delay: -8s;
+            animation-duration: 30s;
+        }
+
+        .color-shape:nth-child(3) {
+            animation-delay: -15s;
+            animation-duration: 35s;
+        }
+
+        .color-shape:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 28s;
+        }
+
+        .color-shape:nth-child(5) {
+            animation-delay: -12s;
+            animation-duration: 32s;
+        }
+
+        .color-shape:nth-child(6) {
+            animation-delay: -20s;
+            animation-duration: 27s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            25% {
+                transform: translate(-10%, -5%) scale(1.1) rotate(90deg);
+            }
+            50% {
+                transform: translate(-5%, -10%) scale(0.9) rotate(180deg);
+            }
+            75% {
+                transform: translate(-15%, -3%) scale(1.05) rotate(270deg);
+            }
+        }
+
+        .regenerate-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            opacity: 0.7;
+        }
+
+        .regenerate-btn:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateX(-50%) scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background-container" id="backgroundContainer"></div>
+        <button class="regenerate-btn" onclick="regenerateGradient()">Regenerate</button>
+    </div>
+
+    <script>
+        function hslToHex(h, s, l) {
+            l /= 100;
+            const a = s * Math.min(l, 1 - l) / 100;
+            const f = n => {
+                const k = (n + h / 30) % 12;
+                const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                return Math.round(255 * color).toString(16).padStart(2, '0');
+            };
+            return `#${f(0)}${f(8)}${f(4)}`;
+        }
+
+        function generateSmoothGradientColors() {
+            const numColors = 3 + Math.floor(Math.random() * 4);
+            const colors = [];
+
+            for (let i = 0; i < numColors; i++) {
+                const hue = Math.floor(Math.random() * 360);
+                const saturation = 70 + Math.floor(Math.random() * 30);
+                const lightness = 45 + Math.floor(Math.random() * 20);
+                colors.push([hue, saturation, lightness]);
+            }
+
+            colors.sort((a, b) => a[0] - b[0]);
+            return colors;
+        }
+
+        function createGradientBackground(colors) {
+            const numColors = colors.length;
+            let gradient = '';
+
+            if (numColors === 3) {
+                const hexColors = colors.map(color => hslToHex(...color));
+                const angle = Math.floor(Math.random() * 60) + 15;
+                gradient = `linear-gradient(${angle}deg, ${hexColors[0]}, ${hexColors[1]}, ${hexColors[2]})`;
+            } else if (numColors === 4) {
+                const hexColors = colors.map(color => hslToHex(...color));
+                gradient = `radial-gradient(circle at ${10 + Math.random() * 20}% ${10 + Math.random() * 20}%, ${hexColors[0]}, transparent 70%),
+                           radial-gradient(circle at ${80 + Math.random() * 20}% ${20 + Math.random() * 20}%, ${hexColors[1]}, transparent 70%),
+                           radial-gradient(circle at ${15 + Math.random() * 20}% ${70 + Math.random() * 20}%, ${hexColors[2]}, transparent 70%),
+                           radial-gradient(circle at ${75 + Math.random() * 20}% ${75 + Math.random() * 20}%, ${hexColors[3]}, transparent 70%)`;
+            } else if (numColors === 5 || numColors === 6) {
+                const hexColors = colors.map(color => hslToHex(...color));
+                const positions = [
+                    {x: 10 + Math.random() * 15, y: 10 + Math.random() * 15},
+                    {x: 85 + Math.random() * 10, y: 15 + Math.random() * 15},
+                    {x: 5 + Math.random() * 10, y: 80 + Math.random() * 15},
+                    {x: 90 + Math.random() * 5, y: 85 + Math.random() * 10},
+                    {x: 50 + Math.random() * 20, y: 50 + Math.random() * 20}
+                ];
+
+                if (numColors === 6) {
+                    positions.push({x: 30 + Math.random() * 40, y: 30 + Math.random() * 40});
+                }
+
+                const gradients = positions.map((pos, i) => {
+                    const size = 40 + Math.random() * 30;
+                    return `radial-gradient(circle at ${pos.x}% ${pos.y}%, ${hexColors[i]}, transparent ${size}%)`;
+                });
+
+                gradient = gradients.join(', ');
+            }
+
+            return gradient;
+        }
+
+        function createColorShape(color, index, totalColors) {
+            const positions = [
+                {x: -50 + Math.random() * 50, y: -50 + Math.random() * 50},
+                {x: 50 + Math.random() * 50, y: -50 + Math.random() * 50},
+                {x: -50 + Math.random() * 50, y: 50 + Math.random() * 50},
+                {x: 50 + Math.random() * 50, y: 50 + Math.random() * 50},
+                {x: -25 + Math.random() * 25, y: -25 + Math.random() * 25},
+                {x: 25 + Math.random() * 25, y: 25 + Math.random() * 25}
+            ];
+
+            const pos = positions[index % positions.length];
+            const hexColor = hslToHex(...color);
+            const opacity = 0.6 + Math.random() * 0.3;
+
+            const shape = document.createElement('div');
+            shape.className = 'color-shape';
+            shape.style.background = `radial-gradient(circle, ${hexColor} 0%, transparent 70%)`;
+            shape.style.left = `${pos.x}%`;
+            shape.style.top = `${pos.y}%`;
+            shape.style.opacity = opacity;
+
+            return shape;
+        }
+
+        function regenerateGradient() {
+            const colors = generateSmoothGradientColors();
+            const container = document.getElementById('backgroundContainer');
+
+            container.innerHTML = '';
+
+            colors.forEach((color, index) => {
+                const shape = createColorShape(color, index, colors.length);
+                container.appendChild(shape);
+            });
+
+            document.body.style.background = createGradientBackground(colors);
+        }
+
+        // Generate initial gradient on page load
+        window.addEventListener('load', () => {
+            regenerateGradient();
+        });
+    </script>
+</body>
+</html>
