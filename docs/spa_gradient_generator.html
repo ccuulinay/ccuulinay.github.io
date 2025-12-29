@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gradient Wave Generator</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -99,12 +100,17 @@
             }
         }
 
-        .regenerate-btn {
+        .button-group {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
             z-index: 20;
+        }
+
+        .btn {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -118,18 +124,21 @@
             opacity: 0.7;
         }
 
-        .regenerate-btn:hover {
+        .btn:hover {
             opacity: 1;
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.4);
-            transform: translateX(-50%) scale(1.05);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="background-container" id="backgroundContainer"></div>
-        <button class="regenerate-btn" onclick="regenerateGradient()">Regenerate</button>
+        <div class="button-group">
+            <button class="btn" onclick="downloadImage()">Download</button>
+            <button class="btn" onclick="regenerateGradient()">Regenerate</button>
+        </div>
     </div>
 
     <script>
@@ -234,6 +243,41 @@
             });
 
             document.body.style.background = createGradientBackground(colors);
+        }
+
+        async function downloadImage() {
+            try {
+                const buttonGroup = document.querySelector('.button-group');
+                buttonGroup.style.display = 'none';
+
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                const canvas = await html2canvas(document.body, {
+                    backgroundColor: null,
+                    useCORS: false,
+                    allowTaint: false,
+                    logging: true,
+                    scale: window.devicePixelRatio,
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    windowWidth: window.innerWidth,
+                    windowHeight: window.innerHeight,
+                    foreignObjectRendering: true,
+                    removeContainer: false,
+                    imageTimeout: 0
+                });
+
+                buttonGroup.style.display = 'flex';
+
+                const link = document.createElement('a');
+                link.download = `gradient-${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+            } catch (error) {
+                console.error('Download failed:', error);
+                buttonGroup.style.display = 'flex';
+                alert('Failed to download image');
+            }
         }
 
         // Generate initial gradient on page load
