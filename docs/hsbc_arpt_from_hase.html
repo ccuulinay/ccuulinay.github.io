@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汇丰2025年报分析 - 恒生集团视角</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-navy: #0a1628;
+            --secondary-navy: #1a2942;
+            --accent-gold: #c9a227;
+            --accent-gold-light: #e8d5a3;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-muted: #7a7a8a;
+            --bg-cream: #faf8f5;
+            --bg-white: #ffffff;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-cream);
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 4px;
+        }
+
+        /* Header Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(201, 162, 39, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--accent-gold-light);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: '●';
+            color: var(--accent-gold);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--accent-gold);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            animation: underline 1s ease forwards 0.5s;
+        }
+
+        @keyframes underline {
+            to { transform: scaleX(1); }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .hero-meta {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .scroll-indicator:hover {
+            color: var(--accent-gold);
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0;
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-navy);
+        }
+
+        .nav-brand span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-navy);
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--accent-gold);
+            background: rgba(201, 162, 39, 0.15);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c547 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-gold) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.02) 100%);
+            border-left: 4px solid var(--accent-gold);
+            padding: 25px 30px;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.08) 0%, rgba(220, 38, 38, 0.02) 100%);
+            border-left-color: var(--danger-red);
+        }
+
+        .highlight-box.success {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(5, 150, 105, 0.02) 100%);
+            border-left-color: var(--success-green);
+        }
+
+        .highlight-box h4 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--primary-navy);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gold);
+        }
+
+        .metric-card.negative::after {
+            background: var(--danger-red);
+        }
+
+        .metric-card.positive::after {
+            background: var(--success-green);
+        }
+
+        .metric-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .metric-card.negative .metric-value {
+            color: var(--danger-red);
+        }
+
+        .metric-card.positive .metric-value {
+            color: var(--success-green);
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .metric-change {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin: 25px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-white);
+            font-size: 0.95rem;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%);
+        }
+
+        th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+        }
+
+        tr:hover {
+            background: rgba(201, 162, 39, 0.03);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .positive-value {
+            color: var(--success-green);
+            font-weight: 600;
+        }
+
+        .negative-value {
+            color: var(--danger-red);
+            font-weight: 600;
+        }
+
+        /* Strategy Grid */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .strategy-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-gold);
+        }
+
+        .strategy-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c547 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .strategy-card h4 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.15rem;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+        }
+
+        .strategy-card ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .strategy-card li {
+            margin: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Comparison */
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            background: var(--bg-white);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .comparison-item {
+            text-align: center;
+        }
+
+        .comparison-item h4 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .comparison-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .vs-divider {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c547 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Charts */
+        .chart-container {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            margin: 30px 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .chart-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold) 0%, #e8c547 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            font-family: 'Noto Serif SC', serif;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 30px auto;
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-container, .scroll-indicator { display: none; }
+            .hero { min-height: auto; padding: 40px 20px; }
+            .card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .main-content { padding: 40px 20px; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .two-column { grid-template-columns: 1fr; }
+            .comparison-row { grid-template-columns: 1fr; text-align: center; }
+            .vs-divider { margin: 10px auto; }
+            .card { padding: 25px; }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mt-4 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="top">
+        <div class="hero-content">
+            <div class="hero-badge">CONFIDENTIAL · 内部战略参考</div>
+            <h1>汇丰<span>2025</span>年报分析</h1>
+            <p class="hero-subtitle">从恒生集团零售业务主管视角的竞争对手深度剖析</p>
+            <p class="hero-meta">报告日期：2026年2月27日 · 分析师：恒生集团零售业务部</p>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('nav').scrollIntoView({behavior: 'smooth'})">
+            向下滚动浏览报告
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="nav-container" id="nav">
+        <nav class="nav">
+            <div class="nav-brand">汇丰<span>2025</span>年报</div>
+            <div class="nav-links">
+                <a href="#executive-summary" class="nav-link">执行摘要</a>
+                <a href="#financial-performance" class="nav-link">财务表现</a>
+                <a href="#retail-banking" class="nav-link">零售银行</a>
+                <a href="#competitive-landscape" class="nav-link">竞争格局</a>
+                <a href="#industry-trends" class="nav-link">行业趋势</a>
+                <a href="#challenges" class="nav-link">挑战风险</a>
+                <a href="#strategy" class="nav-link">战略建议</a>
+                <a href="#conclusion" class="nav-link">结论展望</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Executive Summary -->
+        <section class="section" id="executive-summary">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2 class="section-title">执行摘要</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h4>核心发现</h4>
+                <p>汇丰2025年报告税前利润299.1亿美元（同比下降7.4%），但<strong style="color: var(--success-green);">剔除特殊项目后核心利润达366亿美元</strong>（同比增长），显示其基本业务依然强劲。</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card negative">
+                    <div class="metric-value">-7.4%</div>
+                    <div class="metric-label">报告利润同比</div>
+                    <div class="metric-change">受一次性项目影响</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">+7.0%</div>
+                    <div class="metric-label">核心利润同比</div>
+                    <div class="metric-change">剔除特殊项目后</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">32%</div>
+                    <div class="metric-label">香港业务贡献</div>
+                    <div class="metric-change">95.8亿美元利润</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">+40%</div>
+                    <div class="metric-label">香港财富收入增长</div>
+                    <div class="metric-change">至22亿美元</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">🎯 对恒生集团的战略启示</h3>
+                <ul>
+                    <li>汇丰正全力加码财富管理业务，香港市场竞争将白热化</li>
+                    <li>恒生需加速差异化定位，深耕本地客户关系</li>
+                    <li>同时借助与汇丰的协同效应提升竞争力</li>
+                    <li>香港业务占汇丰利润32%，恒生应关注集团资源分配策略</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Financial Performance -->
+        <section class="section" id="financial-performance">
+            <div class="section-header">
+                <div class="section-icon">💰</div>
+                <h2 class="section-title">财务表现核心数据</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">2025年全年业绩概览</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>指标</th>
+                            <th>2025年</th>
+                            <th>2024年</th>
+                            <th>同比变化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>报告税前利润</strong></td>
+                            <td>299.1亿美元</td>
+                            <td>323.1亿美元</td>
+                            <td class="negative-value">-7.4%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>核心税前利润（剔除特殊项目）</strong></td>
+                            <td>366亿美元</td>
+                            <td>342亿美元</td>
+                            <td class="positive-value">+7.0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>营业收入</strong></td>
+                            <td>682.7亿美元</td>
+                            <td>658.5亿美元</td>
+                            <td class="positive-value">+3.7%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>净利息收入</strong></td>
+                            <td>347.9亿美元</td>
+                            <td>327.3亿美元</td>
+                            <td class="positive-value">+6.3%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>净手续费收入</strong></td>
+                            <td>133.4亿美元</td>
+                            <td>122.9亿美元</td>
+                            <td class="positive-value">+8.5%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>报告RoTE</strong></td>
+                            <td>13.3%</td>
+                            <td>14.6%</td>
+                            <td class="negative-value">-1.3个百分点</td>
+                        </tr>
+                        <tr>
+                            <td><strong>核心RoTE</strong></td>
+                            <td>17.0%</td>
+                            <td>16.0%</td>
+                            <td class="positive-value">+1.0个百分点</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box warning">
+                <h4>⚠️ 特殊项目影响分析（总计49亿美元）</h4>
+                <ul>
+                    <li><strong>交通银行股权减值：</strong>21亿美元</li>
+                    <li><strong>法国贷款组合出售损失：</strong>15亿美元</li>
+                    <li><strong>法律准备金：</strong>14亿美元（含麦道夫案11亿美元）</li>
+                    <li><strong>重组成本：</strong>10亿美元</li>
+                </ul>
+                <p style="margin-top: 15px; font-style: italic; color: var(--text-muted);">恒生视角：这些特殊项目多为非经营性、一次性因素。剔除后，汇丰核心盈利能力实际增强。</p>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">各业务板块表现</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>业务板块</th>
+                            <th>税前利润</th>
+                            <th>占集团比例</th>
+                            <th>同比增长</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>香港业务</strong></td>
+                            <td>95.8亿美元</td>
+                            <td>32.0%</td>
+                            <td class="positive-value">+6%</td>
+                        </tr>
+                        <tr>
+                            <td>企业及机构银行（CIB）</td>
+                            <td>113.9亿美元</td>
+                            <td>38.1%</td>
+                            <td class="positive-value">+3%</td>
+                        </tr>
+                        <tr>
+                            <td>英国业务</td>
+                            <td>67.1亿美元</td>
+                            <td>22.4%</td>
+                            <td class="positive-value">+5%</td>
+                        </tr>
+                        <tr>
+                            <td>国际财富及卓越理财（IWPB）</td>
+                            <td>43.7亿美元</td>
+                            <td>14.6%</td>
+                            <td class="positive-value">+14.6%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Retail Banking -->
+        <section class="section" id="retail-banking">
+            <div class="section-header">
+                <div class="section-icon">🏦</div>
+                <h2 class="section-title">零售及财富管理业务深度剖析</h2>
+            </div>
+
+            <div class="two-column">
+                <div class="card">
+                    <h3 class="card-title">📈 客户增长数据</h3>
+                    <div class="metric-card" style="margin-bottom: 20px;">
+                        <div class="metric-value">60万+</div>
+                        <div class="metric-label">2025上半年新增富裕客户</div>
+                    </div>
+                    <div class="metric-card" style="margin-bottom: 20px;">
+                        <div class="metric-value">620万</div>
+                        <div class="metric-label">香港个人客户总数</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">67%</div>
+                        <div class="metric-label">跨境新客户来自内地</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">💵 收入增长亮点</h3>
+                    <div class="metric-card positive" style="margin-bottom: 20px;">
+                        <div class="metric-value">+40%</div>
+                        <div class="metric-label">香港财富收入增长</div>
+                        <div class="metric-change">至22亿美元</div>
+                    </div>
+                    <div class="metric-card positive" style="margin-bottom: 20px;">
+                        <div class="metric-value">+22%</div>
+                        <div class="metric-label">亚洲财富管理收入增长</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$440亿</div>
+                        <div class="metric-label">新增投资资产净额</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🎯 战略举措</h3>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">01</div>
+                    <h4>资源重新配置</h4>
+                    <p>从非策略业务调拨<strong style="color: var(--accent-gold);">15亿美元</strong>至香港、新加坡、中国内地等核心市场</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">02</div>
+                    <h4>人力扩张</h4>
+                    <p>计划到2028年将客户经理岗位增加<strong style="color: var(--accent-gold);">超过三分之一</strong></p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">03</div>
+                    <h4>基础设施投资</h4>
+                    <p>积极开设财富管理中心，香港作为增长最快市场获重点投入</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">04</div>
+                    <h4>科技投入</h4>
+                    <p>与恒生联合投入<strong style="color: var(--accent-gold);">50亿港元</strong>升级数字化系统（三年计划）</p>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">2026-2028年战略目标</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>指标</th>
+                            <th>目标</th>
+                            <th>当前水平</th>
+                            <th>挑战程度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RoTE</strong></td>
+                            <td>≥17%</td>
+                            <td>17%（核心）</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                        <tr>
+                            <td><strong>净利息收入</strong></td>
+                            <td>≥450亿美元（2026年）</td>
+                            <td>347.9亿美元（2025年）</td>
+                            <td class="positive-value">★★★★☆</td>
+                        </tr>
+                        <tr>
+                            <td><strong>收入增长</strong></td>
+                            <td>2026-2028年复合增长率5%</td>
+                            <td>3.7%（2025年）</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                        <tr>
+                            <td><strong>财富管理手续费</strong></td>
+                            <td>双位数年均增长</td>
+                            <td>+24%（2025年）</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Competitive Landscape -->
+        <section class="section" id="competitive-landscape">
+            <div class="section-header">
+                <div class="section-icon">⚔️</div>
+                <h2 class="section-title">香港银行业竞争格局分析</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">市场份额格局</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>银行</th>
+                            <th>市场份额</th>
+                            <th>核心优势</th>
+                            <th>对恒生威胁</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>汇丰银行</strong></td>
+                            <td>~35%</td>
+                            <td>网络最广、品牌最强、全球服务</td>
+                            <td class="negative-value">高</td>
+                        </tr>
+                        <tr>
+                            <td><strong>中银香港</strong></td>
+                            <td>~20%</td>
+                            <td>人民币清算垄断、母行协同、年轻化</td>
+                            <td class="negative-value">高</td>
+                        </tr>
+                        <tr>
+                            <td><strong>恒生银行</strong></td>
+                            <td>~18%</td>
+                            <td>本地深耕、跨境理财、与汇丰协同</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>渣打银行</td>
+                            <td>~9%</td>
+                            <td>数字化领先、虚拟资产布局</td>
+                            <td class="positive-value">中</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;"><em>注：若汇丰完成恒生私有化，汇丰系市场份额将接近35%</em></p>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🏆 恒生 vs 汇丰：竞争优势对比</h3>
+            <div class="comparison-row">
+                <div class="comparison-item">
+                    <h4>🌍 全球网络</h4>
+                    <p>汇丰：覆盖60+国家</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="comparison-item">
+                    <h4>🤝 协同优势</h4>
+                    <p>恒生：背靠汇丰全球资源</p>
+                </div>
+            </div>
+            <div class="comparison-row">
+                <div class="comparison-item">
+                    <h4>📢 品牌影响力</h4>
+                    <p>汇丰：国际知名度最高</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="comparison-item">
+                    <h4>🏠 本土认同</h4>
+                    <p>恒生：香港本土认同度高</p>
+                </div>
+            </div>
+            <div class="comparison-row">
+                <div class="comparison-item">
+                    <h4>👥 客户规模</h4>
+                    <p>汇丰：620万香港客户</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="comparison-item">
+                    <h4>🎯 客户深度</h4>
+                    <p>恒生：深耕富裕客户群</p>
+                </div>
+            </div>
+
+            <div class="highlight-box warning">
+                <h4>⚠️ 中银香港的核心威胁</h4>
+                <ul>
+                    <li><strong>人民币业务垄断：</strong>香港唯一人民币清算行，2024年清算量达713万亿元（+49%）</li>
+                    <li><strong>年轻客群优势：</strong>18-24岁客户中市占率34%（第一）</li>
+                    <li><strong>跨境理财通领先：</strong>新造住宅按揭市场连续6年第一</li>
+                    <li><strong>银团贷款霸主：</strong>连续20年港澳银团贷款安排行首位</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Industry Trends -->
+        <section class="section" id="industry-trends">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <h2 class="section-title">行业趋势与机遇</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">🌏 香港财富管理市场展望</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$2.9万亿</div>
+                    <div class="metric-label">2025年预计跨境财富管理规模</div>
+                    <div class="metric-change">有望超越瑞士全球第一</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">10%</div>
+                    <div class="metric-label">2026-2031年复合增长率</div>
+                    <div class="metric-change">2031年达2.6万亿美元</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">85%</div>
+                    <div class="metric-label">从业者预期</div>
+                    <div class="metric-change">未来5年AUM年均增长≥6%</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">2,700+</div>
+                    <div class="metric-label">香港家族办公室数量</div>
+                    <div class="metric-change">2030年AUM预计增长80%</div>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🚀 核心驱动因素</h3>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">🇨🇳</div>
+                    <h4>内地财富转移</h4>
+                    <p>2030年内地家庭可投资资产将达<strong style="color: var(--accent-gold);">580万亿元人民币</strong></p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%);">🎫</div>
+                    <h4>资本投资者入境计划（CIES）</h4>
+                    <p>11个月引入超<strong style="color: var(--accent-gold);">270亿港元</strong>资金</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);">📊</div>
+                    <h4>IPO市场复苏</h4>
+                    <p>吸引企业赴港上市，带动相关财富服务需求</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);">🌐</div>
+                    <h4>超级联系人角色</h4>
+                    <p>内地政府持续支持香港作为连接内地与全球资本市场的枢纽</p>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">📋 2026年关键趋势</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>趋势</th>
+                            <th>对恒生影响</th>
+                            <th>机会等级</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AI与智能体应用</td>
+                            <td>需加大科技投入</td>
+                            <td class="positive-value">★★★★☆</td>
+                        </tr>
+                        <tr>
+                            <td>跨境理财通扩容</td>
+                            <td>直接利好恒生跨境业务</td>
+                            <td class="positive-value">★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>数字资产代币化</td>
+                            <td>需布局新产品线</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                        <tr>
+                            <td>多地配置需求</td>
+                            <td>可利用与汇丰的协同</td>
+                            <td class="positive-value">★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>净息差持续收窄</td>
+                            <td>压力收入来源</td>
+                            <td class="negative-value">★★☆☆☆</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Challenges -->
+        <section class="section" id="challenges">
+            <div class="section-header">
+                <div class="section-icon">⚠️</div>
+                <h2 class="section-title">挑战与风险评估</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">🏦 汇丰面临的挑战（对恒生的机会）</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>挑战</th>
+                            <th>影响</th>
+                            <th>恒生可利用的机会</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>规模过大导致灵活性不足</td>
+                            <td>决策链条长</td>
+                            <td>快速响应本地客户需求</td>
+                        </tr>
+                        <tr>
+                            <td>全球合规成本高企</td>
+                            <td>资源分散</td>
+                            <td>专注香港本地合规优势</td>
+                        </tr>
+                        <tr>
+                            <td>内地商业地产敞口</td>
+                            <td>资产质量压力</td>
+                            <td>恒生的商业地产风险相对可控</td>
+                        </tr>
+                        <tr>
+                            <td>与恒生整合复杂性</td>
+                            <td>执行风险</td>
+                            <td>主动争取有利地位</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🔴 恒生自身面临的挑战</h3>
+            <div class="highlight-box warning">
+                <h4>财务表现压力</h4>
+                <ul>
+                    <li>2025年上半年净利润同比下降<strong>30.5%</strong>（68.8亿港元）</li>
+                    <li>净利息收益率下降<strong>30个基点</strong>至1.99%</li>
+                    <li>不良贷款率上升至<strong>6.69%</strong>（主要来自商业地产板块）</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box warning">
+                <h4>竞争压力</h4>
+                <ul>
+                    <li>汇丰财富管理收入暴增43%，直接冲击恒生同类业务</li>
+                    <li>中银香港年轻客群优势明显，恒生需加强客户获取能力</li>
+                    <li>虚拟银行在数字渠道的竞争</li>
+                </ul>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🌍 宏观环境风险矩阵</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>风险因素</th>
+                            <th>可能性</th>
+                            <th>影响程度</th>
+                            <th>应对建议</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>美联储利率路径不确定</td>
+                            <td class="negative-value">高</td>
+                            <td>中</td>
+                            <td>加强利率风险对冲</td>
+                        </tr>
+                        <tr>
+                            <td>地缘政治紧张</td>
+                            <td>中</td>
+                            <td class="negative-value">高</td>
+                            <td>多元化客户来源</td>
+                        </tr>
+                        <tr>
+                            <td>商业地产持续低迷</td>
+                            <td class="negative-value">高</td>
+                            <td class="negative-value">高</td>
+                            <td>控制新增敞口</td>
+                        </tr>
+                        <tr>
+                            <td>人才竞争加剧</td>
+                            <td class="negative-value">高</td>
+                            <td>中</td>
+                            <td>优化薪酬与培训体系</td>
+                        </tr>
+                        <tr>
+                            <td>监管要求趋严</td>
+                            <td>中</td>
+                            <td>中</td>
+                            <td>提前布局合规科技</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Strategy -->
+        <section class="section" id="strategy">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h2 class="section-title">战略建议</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">📅 短期策略（2026年）</h3>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">01</div>
+                    <h4>强化财富管理差异化定位</h4>
+                    <ul>
+                        <li>专注<strong>家族财富传承</strong>服务，与汇丰形成互补</li>
+                        <li>推出针对专业人士的专属理财方案</li>
+                        <li>深化"Wealth Master for Family"等产品优势</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">02</div>
+                    <h4>加速跨境业务布局</h4>
+                    <ul>
+                        <li>利用首批IBPS-FPS互联优势</li>
+                        <li>在中环、旺角、尖沙咀旗舰中心强化跨境服务</li>
+                        <li>与恒生中国深度协同，保持南向下贷款增长势头</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">03</div>
+                    <h4>数字化能力提升</h4>
+                    <ul>
+                        <li>加速AI Mark（虚拟化身理财顾问）推广</li>
+                        <li>优化"Investors Like You"智能投资工具</li>
+                        <li>提升线上开户和客户旅程流畅度</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">04</div>
+                    <h4>风险管理强化</h4>
+                    <ul>
+                        <li>严格控制商业地产新增敞口</li>
+                        <li>提升拨备覆盖率</li>
+                        <li>推广"Money Safe Account"建立客户信任</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">📆 中期策略（2026-2028年）</h3>
+            <div class="highlight-box success">
+                <h4>✅ 明确私有化后的战略定位</h4>
+                <ul>
+                    <li>争取确立"<strong>香港本土高端财富管理专家</strong>"的定位</li>
+                    <li>保留并强化三项核心独立性：持牌资质、企业管治、品牌形象</li>
+                    <li>在协同与独立之间找到最佳平衡点</li>
+                </ul>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>战略目标</th>
+                            <th>当前水平</th>
+                            <th>目标水平</th>
+                            <th>关键举措</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>客户增长</strong></td>
+                            <td>年增长~8%</td>
+                            <td>年增长10%</td>
+                            <td>重点拓展内地高净值客户</td>
+                        </tr>
+                        <tr>
+                            <td><strong>非利息收入占比</strong></td>
+                            <td>31.6%</td>
+                            <td>40%</td>
+                            <td>扩大基金、保险销售</td>
+                        </tr>
+                        <tr>
+                            <td><strong>财富管理收入</strong></td>
+                            <td>+43%（2025H1）</td>
+                            <td>双位数年均增长</td>
+                            <td>深化家族财富管理</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CET1比率</strong></td>
+                            <td>21.3%</td>
+                            <td>维持20%以上</td>
+                            <td>保持充足资本缓冲</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🤝 与汇丰的协同机会</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>协同领域</th>
+                            <th>具体举措</th>
+                            <th>预期效益</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>客户转介</strong></td>
+                            <td>建立高净值客户双向转介机制</td>
+                            <td>提升客户终身价值</td>
+                        </tr>
+                        <tr>
+                            <td><strong>产品共享</strong></td>
+                            <td>接入汇丰全球投资产品平台</td>
+                            <td>丰富产品线</td>
+                        </tr>
+                        <tr>
+                            <td><strong>科技共享</strong></td>
+                            <td>利用汇丰的科技基础设施</td>
+                            <td>降低IT投入成本</td>
+                        </tr>
+                        <tr>
+                            <td><strong>跨境服务</strong></td>
+                            <td>联合推广"1+1 Proposition"</td>
+                            <td>提升客户体验</td>
+                        </tr>
+                        <tr>
+                            <td><strong>风控协同</strong></td>
+                            <td>共享反欺诈和AML系统</td>
+                            <td>提升合规效率</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section" id="conclusion">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2 class="section-title">结论与展望</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">🔑 核心结论</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">1</div>
+                    <div class="metric-label">汇丰基本盘依然强劲</div>
+                    <div class="metric-change">核心RoTE达17%，盈利能力增强</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2</div>
+                    <div class="metric-label">香港市场竞争加剧</div>
+                    <div class="metric-change">汇丰全力加码财富管理业务</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">恒生存在差异化空间</div>
+                    <div class="metric-change">深耕本地+跨境服务+协同效应</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">4</div>
+                    <div class="metric-label">行业机遇大于挑战</div>
+                    <div class="metric-change">香港有望成为全球最大跨境财富中心</div>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">📊 2026年关键关注指标</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>指标</th>
+                            <th>汇丰指引</th>
+                            <th>恒生目标</th>
+                            <th>行业预期</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RoTE</strong></td>
+                            <td>≥17%</td>
+                            <td>维持15%以上</td>
+                            <td>行业平均12-14%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>财富管理收入</strong></td>
+                            <td>双位数增长</td>
+                            <td>双位数增长</td>
+                            <td>高速增长期</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CET1比率</strong></td>
+                            <td>~14.9%</td>
+                            <td>维持20%以上</td>
+                            <td>监管最低8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box success">
+                <h4>💡 最终建议</h4>
+                <p style="margin-bottom: 15px;"><strong>作为恒生集团零售业务主管，我建议：</strong></p>
+                <ol>
+                    <li><strong>正视竞争，但不必恐慌：</strong>汇丰的强势是预期之中的，恒生有自己的独特优势（本土深耕、灵活决策、与汇丰的协同）</li>
+                    <li><strong>聚焦差异化，避免正面竞争：</strong>不与汇丰在规模上比拼，而是在服务深度、客户关系、跨境便利性上建立优势</li>
+                    <li><strong>加速转型，把握窗口期：</strong>香港成为全球财富管理中心的历史机遇期有限，需加速财富管理业务转型</li>
+                    <li><strong>主动协同，争取主动：</strong>在私有化进程中，主动争取对恒生有利的战略定位，将协同效应最大化</li>
+                    <li><strong>风险为先，稳健经营：</strong>在扩张的同时，严格控制商业地产风险，保持充足的资本缓冲</li>
+                </ol>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📌 免责声明</h4>
+                <p>本报告基于公开信息和合理推测编制，仅供内部战略参考，不构成投资建议。报告中的数据来源包括汇丰控股2025年年报、恒生银行2025年中期报告、香港金融管理局数据及多家投行研报。</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>汇丰2025年报分析</h3>
+            <p>报告编制：恒生集团零售业务部 | 日期：2026年2月27日</p>
+            <div class="footer-divider"></div>
+            <p>数据来源：汇丰控股、恒生银行、香港金管局、投行研报</p>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">CONFIDENTIAL · 内部战略参考</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll and active nav link
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.metric-card, .strategy-card, .card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Animate progress bars
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                }
+            });
+        }, observerOptions);
+
+        progressBars.forEach(bar => progressObserver.observe(bar));
+    </script>
+</body>
+</html>
