@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSBC 2025 Annual Report Analysis - Hang Seng Group Perspective</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-navy: #0a1628;
+            --secondary-navy: #1a2942;
+            --accent-gold: #c9a227;
+            --accent-gold-light: #e8d5a3;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-muted: #7a7a8a;
+            --bg-cream: #faf8f5;
+            --bg-white: #ffffff;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-cream);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 4px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(201, 162, 39, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 1000px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--accent-gold-light);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+        }
+
+        .hero-badge::before {
+            content: '●';
+            color: var(--accent-gold);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--accent-gold);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            animation: underline 1s ease forwards 0.5s;
+        }
+
+        @keyframes underline {
+            to { transform: scaleX(1); }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .hero-meta {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .scroll-indicator:hover {
+            color: var(--accent-gold);
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0;
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-navy);
+        }
+
+        .nav-brand span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-navy);
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--accent-gold);
+            background: rgba(201, 162, 39, 0.15);
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c547 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-gold) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.02) 100%);
+            border-left: 4px solid var(--accent-gold);
+            padding: 25px 30px;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.08) 0%, rgba(220, 38, 38, 0.02) 100%);
+            border-left-color: var(--danger-red);
+        }
+
+        .highlight-box.success {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(5, 150, 105, 0.02) 100%);
+            border-left-color: var(--success-green);
+        }
+
+        .highlight-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--primary-navy);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gold);
+        }
+
+        .metric-card.negative::after {
+            background: var(--danger-red);
+        }
+
+        .metric-card.positive::after {
+            background: var(--success-green);
+        }
+
+        .metric-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .metric-card.negative .metric-value {
+            color: var(--danger-red);
+        }
+
+        .metric-card.positive .metric-value {
+            color: var(--success-green);
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .metric-change {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin: 25px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-white);
+            font-size: 0.95rem;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%);
+        }
+
+        th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+        }
+
+        tr:hover {
+            background: rgba(201, 162, 39, 0.03);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .positive-value {
+            color: var(--success-green);
+            font-weight: 600;
+        }
+
+        .negative-value {
+            color: var(--danger-red);
+            font-weight: 600;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .strategy-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-gold);
+        }
+
+        .strategy-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c547 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .strategy-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+        }
+
+        .strategy-card ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .strategy-card li {
+            margin: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            background: var(--bg-white);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .comparison-item {
+            text-align: center;
+        }
+
+        .comparison-item h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .comparison-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .vs-divider {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c547 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .chart-container {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            margin: 30px 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .chart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .progress-container {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold) 0%, #e8c547 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 30px auto;
+        }
+
+        @media print {
+            .nav-container, .scroll-indicator { display: none; }
+            .hero { min-height: auto; padding: 40px 20px; }
+            .card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .main-content { padding: 40px 20px; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .two-column { grid-template-columns: 1fr; }
+            .comparison-row { grid-template-columns: 1fr; text-align: center; }
+            .vs-divider { margin: 10px auto; }
+            .card { padding: 25px; }
+        }
+
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mt-4 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <section class="hero" id="top">
+        <div class="hero-content">
+            <div class="hero-badge">Confidential · Internal Strategic Reference</div>
+            <h1>HSBC <span>2025</span> Annual Report Analysis</h1>
+            <p class="hero-subtitle">Comprehensive Competitor Analysis from Hang Seng Group Retail Banking Perspective</p>
+            <p class="hero-meta">Report Date: February 27, 2026 · Analyst: Hang Seng Group Retail Banking Division</p>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('nav').scrollIntoView({behavior: 'smooth'})">
+            Scroll to Explore Report
+        </div>
+    </section>
+
+    <div class="nav-container" id="nav">
+        <nav class="nav">
+            <div class="nav-brand">HSBC <span>2025</span> Report</div>
+            <div class="nav-links">
+                <a href="#executive-summary" class="nav-link">Executive Summary</a>
+                <a href="#financial-performance" class="nav-link">Financial Performance</a>
+                <a href="#retail-banking" class="nav-link">Retail Banking</a>
+                <a href="#competitive-landscape" class="nav-link">Competitive Landscape</a>
+                <a href="#industry-trends" class="nav-link">Industry Trends</a>
+                <a href="#challenges" class="nav-link">Risks & Challenges</a>
+                <a href="#strategy" class="nav-link">Strategic Recommendations</a>
+                <a href="#conclusion" class="nav-link">Conclusion</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="main-content">
+        <section class="section" id="executive-summary">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2 class="section-title">Executive Summary</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Key Findings</h4>
+                <p>HSBC's reported pre-tax profit for 2025 was USD 29.91 billion (down 7.4% YoY), but <strong style="color: var(--success-green);">core profit excluding special items reached USD 36.6 billion</strong> (up YoY), demonstrating that the underlying business remains strong.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card negative">
+                    <div class="metric-value">-7.4%</div>
+                    <div class="metric-label">Reported Profit YoY</div>
+                    <div class="metric-change">Impacted by one-off items</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">+7.0%</div>
+                    <div class="metric-label">Core Profit YoY</div>
+                    <div class="metric-change">Excluding special items</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">32%</div>
+                    <div class="metric-label">Hong Kong Business Contribution</div>
+                    <div class="metric-change">USD 9.58 billion profit</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">+40%</div>
+                    <div class="metric-label">Hong Kong Wealth Revenue Growth</div>
+                    <div class="metric-change">To USD 2.2 billion</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">🎯 Strategic Implications for Hang Seng Group</h3>
+                <ul>
+                    <li>HSBC is aggressively expanding its wealth management business, intensifying competition in the Hong Kong market</li>
+                    <li>Hang Seng must accelerate its differentiation strategy and deepen local customer relationships</li>
+                    <li>Leverage synergies with HSBC to enhance competitiveness</li>
+                    <li>With Hong Kong contributing 32% of HSBC's profits, Hang Seng should monitor HSBC's resource allocation strategy</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="financial-performance">
+            <div class="section-header">
+                <div class="section-icon">💰</div>
+                <h2 class="section-title">Financial Performance Highlights</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">Full Year 2025 Performance Overview</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>2025</th>
+                            <th>2024</th>
+                            <th>YoY Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Reported Pre-tax Profit</strong></td>
+                            <td>USD 29.91 billion</td>
+                            <td>USD 32.31 billion</td>
+                            <td class="negative-value">-7.4%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Core Pre-tax Profit (excl. special items)</strong></td>
+                            <td>USD 36.6 billion</td>
+                            <td>USD 34.2 billion</td>
+                            <td class="positive-value">+7.0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operating Income</strong></td>
+                            <td>USD 68.27 billion</td>
+                            <td>USD 65.85 billion</td>
+                            <td class="positive-value">+3.7%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Interest Income</strong></td>
+                            <td>USD 34.79 billion</td>
+                            <td>USD 32.73 billion</td>
+                            <td class="positive-value">+6.3%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Fee Income</strong></td>
+                            <td>USD 13.34 billion</td>
+                            <td>USD 12.29 billion</td>
+                            <td class="positive-value">+8.5%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reported RoTE</strong></td>
+                            <td>13.3%</td>
+                            <td>14.6%</td>
+                            <td class="negative-value">-1.3 pp</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Core RoTE</strong></td>
+                            <td>17.0%</td>
+                            <td>16.0%</td>
+                            <td class="positive-value">+1.0 pp</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box warning">
+                <h4>⚠️ Special Items Impact Analysis (Total USD 4.9 billion)</h4>
+                <ul>
+                    <li><strong>Bank of Communications impairment:</strong> USD 2.1 billion</li>
+                    <li><strong>France loan portfolio disposal loss:</strong> USD 1.5 billion</li>
+                    <li><strong>Legal provisions:</strong> USD 1.4 billion (including USD 1.1 billion for Madoff case)</li>
+                    <li><strong>Restructuring costs:</strong> USD 1.0 billion</li>
+                </ul>
+                <p style="margin-top: 15px; font-style: italic; color: var(--text-muted);">Hang Seng Perspective: These special items are largely non-operational and one-off in nature. Excluding them, HSBC's core profitability has actually strengthened.</p>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">Segment Performance</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Business Segment</th>
+                            <th>Pre-tax Profit</th>
+                            <th>% of Group</th>
+                            <th>YoY Growth</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hong Kong Business</strong></td>
+                            <td>USD 9.58 billion</td>
+                            <td>32.0%</td>
+                            <td class="positive-value">+6%</td>
+                        </tr>
+                        <tr>
+                            <td>Corporate & Institutional Banking (CIB)</td>
+                            <td>USD 11.39 billion</td>
+                            <td>38.1%</td>
+                            <td class="positive-value">+3%</td>
+                        </tr>
+                        <tr>
+                            <td>UK Business</td>
+                            <td>USD 6.71 billion</td>
+                            <td>22.4%</td>
+                            <td class="positive-value">+5%</td>
+                        </tr>
+                        <tr>
+                            <td>International Wealth & Premier Banking</td>
+                            <td>USD 4.37 billion</td>
+                            <td>14.6%</td>
+                            <td class="positive-value">+14.6%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="retail-banking">
+            <div class="section-header">
+                <div class="section-icon">🏦</div>
+                <h2 class="section-title">Retail & Wealth Management Deep Dive</h2>
+            </div>
+
+            <div class="two-column">
+                <div class="card">
+                    <h3 class="card-title">📈 Customer Growth Metrics</h3>
+                    <div class="metric-card" style="margin-bottom: 20px;">
+                        <div class="metric-value">600K+</div>
+                        <div class="metric-label">New Affluent Customers (H1 2025)</div>
+                    </div>
+                    <div class="metric-card" style="margin-bottom: 20px;">
+                        <div class="metric-value">6.2M</div>
+                        <div class="metric-label">Total Personal Customers in Hong Kong</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">67%</div>
+                        <div class="metric-label">Cross-border Customers from Mainland</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">💵 Revenue Growth Highlights</h3>
+                    <div class="metric-card positive" style="margin-bottom: 20px;">
+                        <div class="metric-value">+40%</div>
+                        <div class="metric-label">Hong Kong Wealth Revenue Growth</div>
+                        <div class="metric-change">To USD 2.2 billion</div>
+                    </div>
+                    <div class="metric-card positive" style="margin-bottom: 20px;">
+                        <div class="metric-value">+22%</div>
+                        <div class="metric-label">Asia Wealth Management Revenue</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$44B</div>
+                        <div class="metric-label">Net New Invested Assets</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🎯 Strategic Initiatives</h3>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">01</div>
+                    <h4>Resource Reallocation</h4>
+                    <p>Deploying <strong style="color: var(--accent-gold);">USD 1.5 billion</strong> from non-strategic businesses to core markets: Hong Kong, Singapore, Mainland China</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">02</div>
+                    <h4>Workforce Expansion</h4>
+                    <p>Planning to increase relationship manager positions by <strong style="color: var(--accent-gold);">over one-third</strong> by 2028</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">03</div>
+                    <h4>Infrastructure Investment</h4>
+                    <p>Actively opening wealth centers with Hong Kong as the fastest-growing market receiving priority investment</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">04</div>
+                    <h4>Technology Investment</h4>
+                    <p>Joint investment with Hang Seng of <strong style="color: var(--accent-gold);">HKD 5 billion</strong> in digital transformation (3-year plan)</p>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">2026-2028 Strategic Targets</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Target</th>
+                            <th>Current Level</th>
+                            <th>Challenge Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RoTE</strong></td>
+                            <td>≥17%</td>
+                            <td>17% (Core)</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Interest Income</strong></td>
+                            <td>≥USD 45 billion (2026)</td>
+                            <td>USD 34.79 billion (2025)</td>
+                            <td class="positive-value">★★★★☆</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Revenue Growth</strong></td>
+                            <td>5% CAGR 2026-2028</td>
+                            <td>3.7% (2025)</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wealth Management Fees</strong></td>
+                            <td>Double-digit annual growth</td>
+                            <td>+24% (2025)</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="competitive-landscape">
+            <div class="section-header">
+                <div class="section-icon">⚔️</div>
+                <h2 class="section-title">Hong Kong Banking Competitive Landscape</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">Market Share Overview</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bank</th>
+                            <th>Market Share</th>
+                            <th>Core Strengths</th>
+                            <th>Threat to Hang Seng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>HSBC</strong></td>
+                            <td>~35%</td>
+                            <td>Widest network, strongest brand, global services</td>
+                            <td class="negative-value">High</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BOCHK</strong></td>
+                            <td>~20%</td>
+                            <td>RMB clearing monopoly, parent bank synergy, youth focus</td>
+                            <td class="negative-value">High</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hang Seng Bank</strong></td>
+                            <td>~18%</td>
+                            <td>Local expertise, cross-border wealth, HSBC synergy</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Standard Chartered</td>
+                            <td>~9%</td>
+                            <td>Digital leadership, virtual asset positioning</td>
+                            <td class="positive-value">Medium</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;"><em>Note: If HSBC completes Hang Seng privatization, HSBC group's market share will approach 35%</em></p>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🏆 Hang Seng vs HSBC: Competitive Advantages</h3>
+            <div class="comparison-row">
+                <div class="comparison-item">
+                    <h4>🌍 Global Network</h4>
+                    <p>HSBC: Coverage in 60+ countries</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="comparison-item">
+                    <h4>🤝 Synergy Advantage</h4>
+                    <p>Hang Seng: Backed by HSBC's global resources</p>
+                </div>
+            </div>
+            <div class="comparison-row">
+                <div class="comparison-item">
+                    <h4>📢 Brand Power</h4>
+                    <p>HSBC: Highest international recognition</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="comparison-item">
+                    <h4>🏠 Local Identity</h4>
+                    <p>Hang Seng: Strong Hong Kong local identity</p>
+                </div>
+            </div>
+            <div class="comparison-row">
+                <div class="comparison-item">
+                    <h4>👥 Customer Scale</h4>
+                    <p>HSBC: 6.2 million Hong Kong customers</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="comparison-item">
+                    <h4>🎯 Customer Depth</h4>
+                    <p>Hang Seng: Deep focus on affluent customers</p>
+                </div>
+            </div>
+
+            <div class="highlight-box warning">
+                <h4>⚠️ BOCHK's Core Threats</h4>
+                <ul>
+                    <li><strong>RMB Business Monopoly:</strong> Sole RMB clearing bank in Hong Kong with CNY 713 trillion clearing volume in 2024 (+49%)</li>
+                    <li><strong>Youth Segment Advantage:</strong> 34% market share among 18-24 age group (Rank #1)</li>
+                    <li><strong>Cross-border Leadership:</strong> #1 in new residential mortgage market for 6 consecutive years</li>
+                    <li><strong>Syndicated Loan Dominance:</strong> #1 arranger in Hong Kong-Macau syndicated loans for 20 consecutive years</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="industry-trends">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <h2 class="section-title">Industry Trends & Opportunities</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">🌏 Hong Kong Wealth Management Outlook</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$2.9T</div>
+                    <div class="metric-label">Expected 2025 Cross-border Wealth</div>
+                    <div class="metric-change">Poised to surpass Switzerland as #1 globally</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">10%</div>
+                    <div class="metric-label">2026-2031 CAGR</div>
+                    <div class="metric-change">Reaching USD 2.6 trillion by 2031</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">85%</div>
+                    <div class="metric-label">Industry Expectation</div>
+                    <div class="metric-change">AUM growth ≥6% annually over next 5 years</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">2,700+</div>
+                    <div class="metric-label">Hong Kong Family Offices</div>
+                    <div class="metric-change">AUM expected to grow 80% by 2030</div>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🚀 Key Growth Drivers</h3>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">🇨🇳</div>
+                    <h4>Mainland Wealth Migration</h4>
+                    <p>Mainland household investable assets to reach <strong style="color: var(--accent-gold);">CNY 580 trillion</strong> by 2030</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%);">🎫</div>
+                    <h4>Capital Investment Entrant Scheme</h4>
+                    <p>Over <strong style="color: var(--accent-gold);">HKD 27 billion</strong> capital inflow in 11 months</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);">📊</div>
+                    <h4>IPO Market Recovery</h4>
+                    <p>Attracting companies to list in Hong Kong, driving wealth services demand</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number" style="background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);">🌐</div>
+                    <h4>Super-Connector Role</h4>
+                    <p>Continued government support for Hong Kong as a gateway between Mainland and global capital markets</p>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">📋 Key Trends for 2026</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Trend</th>
+                            <th>Impact on Hang Seng</th>
+                            <th>Opportunity Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AI & Agent Applications</td>
+                            <td>Need increased technology investment</td>
+                            <td class="positive-value">★★★★☆</td>
+                        </tr>
+                        <tr>
+                            <td>Cross-border Wealth Management Connect Expansion</td>
+                            <td>Direct benefit to Hang Seng's cross-border business</td>
+                            <td class="positive-value">★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>Digital Asset Tokenization</td>
+                            <td>Need to develop new product lines</td>
+                            <td class="positive-value">★★★☆☆</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-jurisdiction Allocation Demand</td>
+                            <td>Can leverage synergy with HSBC</td>
+                            <td class="positive-value">★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>Continued NIM Compression</td>
+                            <td>Pressure on interest income</td>
+                            <td class="negative-value">★★☆☆☆</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="challenges">
+            <div class="section-header">
+                <div class="section-icon">⚠️</div>
+                <h2 class="section-title">Challenges & Risk Assessment</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">🏦 Challenges Facing HSBC (Opportunities for Hang Seng)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Challenge</th>
+                            <th>Impact</th>
+                            <th>Opportunity for Hang Seng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Size-related flexibility constraints</td>
+                            <td>Long decision-making chains</td>
+                            <td>Quick response to local customer needs</td>
+                        </tr>
+                        <tr>
+                            <td>High global compliance costs</td>
+                            <td>Resource dispersion</td>
+                            <td>Focus on Hong Kong local compliance advantages</td>
+                        </tr>
+                        <tr>
+                            <td>Mainland commercial real estate exposure</td>
+                            <td>Asset quality pressure</td>
+                            <td>Hang Seng's CRE risk relatively controlled</td>
+                        </tr>
+                        <tr>
+                            <td>Integration complexity with Hang Seng</td>
+                            <td>Execution risk</td>
+                            <td>Proactively seek favorable positioning</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🔴 Challenges Facing Hang Seng</h3>
+            <div class="highlight-box warning">
+                <h4>Financial Performance Pressure</h4>
+                <ul>
+                    <li>H1 2025 net profit down <strong>30.5%</strong> YoY (HKD 6.88 billion)</li>
+                    <li>NIM decreased by <strong>30 bps</strong> to 1.99%</li>
+                    <li>NPL ratio rose to <strong>6.69%</strong> (primarily from commercial real estate)</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box warning">
+                <h4>Competitive Pressure</h4>
+                <ul>
+                    <li>HSBC's 43% wealth management revenue growth directly impacts Hang Seng's similar business</li>
+                    <li>BOCHK's youth segment advantage requires Hang Seng to strengthen customer acquisition</li>
+                    <li>Virtual banks competing in digital channels</li>
+                </ul>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🌍 Macro Environment Risk Matrix</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk Factor</th>
+                            <th>Likelihood</th>
+                            <th>Impact</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fed interest rate path uncertainty</td>
+                            <td class="negative-value">High</td>
+                            <td>Medium</td>
+                            <td>Strengthen interest rate hedging</td>
+                        </tr>
+                        <tr>
+                            <td>Geopolitical tensions</td>
+                            <td>Medium</td>
+                            <td class="negative-value">High</td>
+                            <td>Diversify customer sources</td>
+                        </tr>
+                        <tr>
+                            <td>Commercial real estate downturn</td>
+                            <td class="negative-value">High</td>
+                            <td class="negative-value">High</td>
+                            <td>Control new exposure</td>
+                        </tr>
+                        <tr>
+                            <td>Intensifying talent competition</td>
+                            <td class="negative-value">High</td>
+                            <td>Medium</td>
+                            <td>Optimize compensation & training</td>
+                        </tr>
+                        <tr>
+                            <td>Stricter regulatory requirements</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Early RegTech deployment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="strategy">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h2 class="section-title">Strategic Recommendations</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">📅 Short-term Strategy (2026)</h3>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">01</div>
+                    <h4>Strengthen Wealth Management Differentiation</h4>
+                    <ul>
+                        <li>Focus on <strong>family wealth succession</strong> services to complement HSBC</li>
+                        <li>Launch exclusive wealth solutions for professionals</li>
+                        <li>Deepen advantages of "Wealth Master for Family" products</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">02</div>
+                    <h4>Accelerate Cross-border Business</h4>
+                    <ul>
+                        <li>Leverage first-mover advantage in IBPS-FPS connectivity</li>
+                        <li>Enhance cross-border services at flagship Central, Mong Kok, TST centers</li>
+                        <li>Deepen synergy with Hang Seng China to maintain Southbound loan growth</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">03</div>
+                    <h4>Digital Capability Enhancement</h4>
+                    <ul>
+                        <li>Accelerate AI Mark (virtual avatar advisor) rollout</li>
+                        <li>Optimize "Investors Like You" intelligent investment tool</li>
+                        <li>Improve online onboarding and customer journey</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">04</div>
+                    <h4>Risk Management Strengthening</h4>
+                    <ul>
+                        <li>Strictly control new commercial real estate exposure</li>
+                        <li>Increase provision coverage ratio</li>
+                        <li>Promote "Money Safe Account" to build customer trust</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">📆 Medium-term Strategy (2026-2028)</h3>
+            <div class="highlight-box success">
+                <h4>✅ Clarify Strategic Positioning Post-Privatization</h4>
+                <ul>
+                    <li>Establish positioning as "<strong>Hong Kong's Premium Local Wealth Management Specialist</strong>"</li>
+                    <li>Maintain and strengthen three core independences: banking license, governance, brand identity</li>
+                    <li>Find optimal balance between synergy and independence</li>
+                </ul>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Strategic Goal</th>
+                            <th>Current Level</th>
+                            <th>Target Level</th>
+                            <th>Key Initiatives</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Customer Growth</strong></td>
+                            <td>~8% annual growth</td>
+                            <td>10% annual growth</td>
+                            <td>Focus on Mainland HNW customers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Non-interest Income Ratio</strong></td>
+                            <td>31.6%</td>
+                            <td>40%</td>
+                            <td>Expand fund and insurance sales</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wealth Management Revenue</strong></td>
+                            <td>+43% (H1 2025)</td>
+                            <td>Double-digit annual growth</td>
+                            <td>Deepen family wealth management</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CET1 Ratio</strong></td>
+                            <td>21.3%</td>
+                            <td>Maintain above 20%</td>
+                            <td>Maintain adequate capital buffer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">🤝 Synergy Opportunities with HSBC</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Synergy Area</th>
+                            <th>Specific Initiatives</th>
+                            <th>Expected Benefits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Customer Referral</strong></td>
+                            <td>Establish two-way HNW customer referral mechanism</td>
+                            <td>Enhance customer lifetime value</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Product Sharing</strong></td>
+                            <td>Access to HSBC's global investment product platform</td>
+                            <td>Enrich product offerings</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technology Sharing</strong></td>
+                            <td>Leverage HSBC's technology infrastructure</td>
+                            <td>Reduce IT investment costs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cross-border Services</strong></td>
+                            <td>Joint promotion of "1+1 Proposition"</td>
+                            <td>Enhance customer experience</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risk Control Synergy</strong></td>
+                            <td>Share anti-fraud and AML systems</td>
+                            <td>Improve compliance efficiency</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="conclusion">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2 class="section-title">Conclusion & Outlook</h2>
+            </div>
+
+            <h3 class="card-title" style="margin-bottom: 20px;">🔑 Key Conclusions</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">1</div>
+                    <div class="metric-label">HSBC's Fundamentals Remain Strong</div>
+                    <div class="metric-change">Core RoTE at 17%, enhanced profitability</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2</div>
+                    <div class="metric-label">Intensifying Hong Kong Competition</div>
+                    <div class="metric-change">HSBC aggressively expanding wealth management</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Differentiation Space Exists for Hang Seng</div>
+                    <div class="metric-change">Local expertise + cross-border + synergy</div>
+                </div>
+                <div class="metric-card positive">
+                    <div class="metric-value">4</div>
+                    <div class="metric-label">Opportunities Outweigh Challenges</div>
+                    <div class="metric-change">Hong Kong poised to become world's largest cross-border wealth hub</div>
+                </div>
+            </div>
+
+            <h3 class="card-title" style="margin: 30px 0 20px;">📊 Key Metrics to Watch in 2026</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>HSBC Guidance</th>
+                            <th>Hang Seng Target</th>
+                            <th>Industry Expectation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RoTE</strong></td>
+                            <td>≥17%</td>
+                            <td>Maintain above 15%</td>
+                            <td>Industry avg 12-14%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wealth Management Revenue</strong></td>
+                            <td>Double-digit growth</td>
+                            <td>Double-digit growth</td>
+                            <td>High growth phase</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CET1 Ratio</strong></td>
+                            <td>~14.9%</td>
+                            <td>Maintain above 20%</td>
+                            <td>Regulatory minimum 8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box success">
+                <h4>💡 Final Recommendations</h4>
+                <p style="margin-bottom: 15px;"><strong>As Head of Hang Seng Group Retail Banking, I recommend:</strong></p>
+                <ol>
+                    <li><strong>Face competition without panic:</strong> HSBC's strength is expected; Hang Seng has unique advantages (local expertise, agile decision-making, HSBC synergy)</li>
+                    <li><strong>Focus on differentiation, avoid head-on competition:</strong> Don't compete with HSBC on scale, but build advantages in service depth, customer relationships, and cross-border convenience</li>
+                    <li><strong>Accelerate transformation to capture the window:</strong> The historic opportunity for Hong Kong to become a global wealth hub is time-limited; accelerate wealth management transformation</li>
+                    <li><strong>Proactively drive synergy:</strong> During privatization, actively seek strategic positioning favorable to Hang Seng and maximize synergy benefits</li>
+                    <li><strong>Risk-first, prudent operations:</strong> While expanding, strictly control commercial real estate risks and maintain adequate capital buffers</li>
+                </ol>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📌 Disclaimer</h4>
+                <p>This report is prepared based on publicly available information and reasonable estimates for internal strategic reference only and does not constitute investment advice. Data sources include HSBC Holdings 2025 Annual Report, Hang Seng Bank 2025 Interim Report, Hong Kong Monetary Authority data, and various investment bank research reports.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>HSBC 2025 Annual Report Analysis</h3>
+            <p>Prepared by: Hang Seng Group Retail Banking Division | Date: February 27, 2026</p>
+            <div class="footer-divider"></div>
+            <p>Data Sources: HSBC Holdings, Hang Seng Bank, HKMA, Investment Bank Research</p>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">CONFIDENTIAL · INTERNAL STRATEGIC REFERENCE</p>
+        </div>
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.metric-card, .strategy-card, .card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                }
+            });
+        }, observerOptions);
+
+        progressBars.forEach(bar => progressObserver.observe(bar));
+    </script>
+</body>
+</html>
