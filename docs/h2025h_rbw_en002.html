@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSBC 2025 Annual Report Analysis | Hang Seng Bank Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hsbc-navy: #0A1628;
+            --hsbc-navy-light: #1a2942;
+            --hsbc-navy-lighter: #243552;
+            --hsbc-gold: #D4AF37;
+            --hsbc-gold-light: #E5C158;
+            --hsbc-gold-dark: #B8962E;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+            --light-gray: #E8E8E8;
+            --medium-gray: #9CA3AF;
+            --dark-gray: #4B5563;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--hsbc-navy);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            background: rgba(10, 22, 40, 0.98);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--hsbc-gold) 0%, var(--hsbc-gold-dark) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--hsbc-navy);
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .logo-text span {
+            color: var(--hsbc-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--hsbc-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--hsbc-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, var(--hsbc-navy) 0%, var(--hsbc-navy-light) 100%);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: linear-gradient(180deg, transparent 0%, black 30%, black 70%, transparent 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--hsbc-gold);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--hsbc-gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--hsbc-gold) 0%, var(--hsbc-gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: var(--medium-gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--hsbc-gold) 0%, var(--hsbc-gold-dark) 100%);
+            color: var(--hsbc-navy);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--hsbc-gold);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--hsbc-gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Executive Summary - Metrics Grid */
+        .metrics-section {
+            background: linear-gradient(180deg, var(--hsbc-navy) 0%, var(--hsbc-navy-light) 100%);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--hsbc-gold) 0%, transparent 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .metric-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .metric-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--hsbc-gold);
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: var(--light-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-radius: 100px;
+        }
+
+        /* Product Analysis Section */
+        .products-section {
+            background: var(--hsbc-navy-light);
+        }
+
+        .product-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product-tab {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--medium-gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .product-tab:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+        }
+
+        .product-tab.active {
+            background: var(--hsbc-gold);
+            color: var(--hsbc-navy);
+            border-color: var(--hsbc-gold);
+        }
+
+        .product-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .product-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .product-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-icon-large {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--hsbc-gold) 0%, var(--hsbc-gold-dark) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.75rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .opportunity-card, .challenge-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .opportunity-card {
+            background: rgba(16, 185, 129, 0.05);
+            border-left-color: var(--success);
+        }
+
+        .challenge-card {
+            background: rgba(245, 158, 11, 0.05);
+            border-left-color: var(--warning);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-list {
+            list-style: none;
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+
+        .card-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--hsbc-gold);
+        }
+
+        /* HK Budget Section */
+        .budget-section {
+            background: var(--hsbc-navy);
+            position: relative;
+        }
+
+        .budget-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--hsbc-gold) 50%, transparent 100%);
+            opacity: 0.3;
+        }
+
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .budget-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .budget-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .budget-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .budget-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+        }
+
+        .budget-card h3 {
+            font-size: 1.25rem;
+        }
+
+        .budget-highlight {
+            background: linear-gradient(135deg, var(--hsbc-gold) 0%, var(--hsbc-gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .budget-list {
+            list-style: none;
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+
+        .budget-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .budget-list li:last-child {
+            border-bottom: none;
+        }
+
+        .budget-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.25rem;
+            width: 6px;
+            height: 6px;
+            background: var(--hsbc-gold);
+            border-radius: 50%;
+        }
+
+        /* Recommendations Section */
+        .recommendations-section {
+            background: linear-gradient(180deg, var(--hsbc-navy-light) 0%, var(--hsbc-navy) 100%);
+        }
+
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .rec-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .rec-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+
+        .rec-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--hsbc-gold) 0%, var(--hsbc-gold-dark) 100%);
+            color: var(--hsbc-navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rec-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .rec-card p {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .rec-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .rec-tag {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--hsbc-gold);
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        /* Roadmap Section */
+        .roadmap-section {
+            background: var(--hsbc-navy);
+            padding-bottom: 8rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--hsbc-gold) 0%, rgba(212, 175, 55, 0.2) 100%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            width: 90%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--hsbc-gold);
+            border-radius: 50%;
+            top: 2rem;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -60px;
+        }
+
+        .timeline-phase {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--hsbc-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-list {
+            list-style: none;
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+
+        .timeline-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--hsbc-gold);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--hsbc-navy-light);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-text {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-date {
+            color: var(--hsbc-gold);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-dot,
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 10px;
+                right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .product-panel {
+                padding: 2rem 1.5rem;
+            }
+
+            .budget-card,
+            .rec-card {
+                padding: 1.5rem;
+            }
+
+            .timeline-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">H</div>
+                <div class="logo-text">HSBC <span>2025</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#metrics">Metrics</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#budget">HK Budget</a></li>
+                <li><a href="#recommendations">Strategy</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Annual Report Analysis</div>
+            <h1>
+                HSBC 2025<br>
+                <span class="highlight">Strategic Analysis</span>
+            </h1>
+            <p class="hero-subtitle">
+                Retail Banking & Wealth Management Perspective<br>
+                for Hang Seng Bank
+            </p>
+            <div class="hero-cta">
+                <a href="#metrics" class="btn btn-primary">View Key Metrics →</a>
+                <a href="#recommendations" class="btn btn-secondary">Strategic Recommendations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary / Metrics Section -->
+    <section class="metrics-section" id="metrics">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-tag">Executive Summary</div>
+                <h2 class="section-title">2025 Performance Highlights</h2>
+                <p class="section-desc">
+                    HSBC delivered strong financial performance in 2025, with Hong Kong operations
+                    contributing significantly to the Group's success.
+                </p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-icon">💰</div>
+                    <div class="metric-value">$29.9B</div>
+                    <div class="metric-label">HSBC Profit Before Tax</div>
+                    <div class="metric-change">Reported 2025</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-icon">🏦</div>
+                    <div class="metric-value">$13.0B</div>
+                    <div class="metric-label">Hong Kong Contribution</div>
+                    <div class="metric-change">↑ 9.6% YoY</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-value">$2.14T</div>
+                    <div class="metric-label">Global Wealth Balances</div>
+                    <div class="metric-change">Worldwide Assets</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-icon">🌏</div>
+                    <div class="metric-value">$1.18T</div>
+                    <div class="metric-label">Hong Kong Wealth Balances</div>
+                    <div class="metric-change">55% of Global</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-icon">📈</div>
+                    <div class="metric-value">$80B</div>
+                    <div class="metric-label">Net New Invested Assets (Global)</div>
+                    <div class="metric-change">2025 Inflows</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-value">$39B</div>
+                    <div class="metric-label">Net New Invested Assets (HK)</div>
+                    <div class="metric-change">49% of Global</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Analysis Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-tag">Product Analysis</div>
+                <h2 class="section-title">Retail Banking & Wealth Products</h2>
+                <p class="section-desc">
+                    Detailed analysis of key product categories with strategic implications
+                    and recommendations for Hang Seng Bank.
+                </p>
+            </div>
+
+            <div class="product-tabs scroll-reveal">
+                <button class="product-tab active" data-tab="credit-cards">💳 Credit Cards</button>
+                <button class="product-tab" data-tab="personal-loans">💵 Personal Loans</button>
+                <button class="product-tab" data-tab="deposits">🏛️ Deposits</button>
+                <button class="product-tab" data-tab="investments">📈 Investments</button>
+                <button class="product-tab" data-tab="insurance">🛡️ Insurance</button>
+            </div>
+
+            <div class="product-content active" id="credit-cards">
+                <div class="product-panel">
+                    <div class="product-header">
+                        <div class="product-icon-large">💳</div>
+                        <div>
+                            <h3 class="product-title">Credit Cards</h3>
+                            <p style="color: var(--medium-gray);">Digital-first propositions with cross-border capabilities</p>
+                        </div>
+                    </div>
+                    <div class="product-grid">
+                        <div class="opportunity-card">
+                            <h4 class="card-title">🚀 Opportunities</h4>
+                            <ul class="card-list">
+                                <li>Digital-First Card Propositions with embedded features</li>
+                                <li>Cross-Border RMB Payment Solutions</li>
+                                <li>Lifestyle Ecosystem Integration (Tourism + Sports + Culture)</li>
+                                <li>Co-branded cards for professionals & Mainland visitors</li>
+                            </ul>
+                        </div>
+                        <div class="challenge-card">
+                            <h4 class="card-title">⚠️ Challenges</h4>
+                            <ul class="card-list">
+                                <li>Intense competition from virtual banks</li>
+                                <li>Interest rate margin compression</li>
+                                <li>Regulatory requirements on responsible lending</li>
+                                <li>Fintech disruption in payments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-content" id="personal-loans">
+                <div class="product-panel">
+                    <div class="product-header">
+                        <div class="product-icon-large">💵</div>
+                        <div>
+                            <h3 class="product-title">Personal Loans</h3>
+                            <p style="color: var(--medium-gray);">Purpose-specific lending with green and tax-linked options</p>
+                        </div>
+                    </div>
+                    <div class="product-grid">
+                        <div class="opportunity-card">
+                            <h4 class="card-title">🚀 Opportunities</h4>
+                            <ul class="card-list">
+                                <li>Tax Relief-Linked Lending aligned with Budget measures</li>
+                                <li>Green Loan Products for sustainable renovations</li>
+                                <li>Digital Asset-Backed Lending (pending regulation)</li>
+                                <li>First Home Starter Loans with government scheme integration</li>
+                            </ul>
+                        </div>
+                        <div class="challenge-card">
+                            <h4 class="card-title">⚠️ Challenges</h4>
+                            <ul class="card-list">
+                                <li>Elevated household debt levels in Hong Kong</li>
+                                <li>CRE market volatility affecting secured lending</li>
+                                <li>Regulatory scrutiny on lending practices</li>
+                                <li>Economic uncertainty impacting demand</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-content" id="deposits">
+                <div class="product-panel">
+                    <div class="product-header">
+                        <div class="product-icon-large">🏛️</div>
+                        <div>
+                            <h3 class="product-title">Deposits</h3>
+                            <p style="color: var(--medium-gray);">RMB and tokenized deposit innovation</p>
+                        </div>
+                    </div>
+                    <div class="product-grid">
+                        <div class="opportunity-card">
+                            <h4 class="card-title">🚀 Opportunities</h4>
+                            <ul class="card-list">
+                                <li>RMB Deposit Products leveraging RMB 200B facility</li>
+                                <li>Tokenized Deposit Solutions via Project Ensemble</li>
+                                <li>Cross-Border Deposit Services for Mainland flows</li>
+                                <li>GBA Multi-Currency Accounts with seamless transfers</li>
+                            </ul>
+                        </div>
+                        <div class="challenge-card">
+                            <h4 class="card-title">⚠️ Challenges</h4>
+                            <ul class="card-list">
+                                <li>Interest rate compression affecting margins</li>
+                                <li>Competition from high-yield savings products</li>
+                                <li>Customer migration to investment products</li>
+                                <li>Virtual bank competition</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-content" id="investments">
+                <div class="product-panel">
+                    <div class="product-header">
+                        <div class="product-icon-large">📈</div>
+                        <div>
+                            <h3 class="product-title">Investment Services</h3>
+                            <p style="color: var(--medium-gray);">Family office solutions and digital asset offerings</p>
+                        </div>
+                    </div>
+                    <div class="product-grid">
+                        <div class="opportunity-card">
+                            <h4 class="card-title">🚀 Opportunities</h4>
+                            <ul class="card-list">
+                                <li>Family Office Services for 3,300+ offices in Hong Kong</li>
+                                <li>Digital Asset Investment for qualified investors</li>
+                                <li>Green and Sustainable Investment Products</li>
+                                <li>REIT Investment Opportunities via mutual access</li>
+                                <li>ESG-themed portfolios aligned with HK standards</li>
+                            </ul>
+                        </div>
+                        <div class="challenge-card">
+                            <h4 class="card-title">⚠️ Challenges</h4>
+                            <ul class="card-list">
+                                <li>Market volatility affecting investment confidence</li>
+                                <li>Regulatory complexity for cross-border products</li>
+                                <li>Fee compression in asset management</li>
+                                <li>Competition from global wealth managers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-content" id="insurance">
+                <div class="product-panel">
+                    <div class="product-header">
+                        <div class="product-icon-large">🛡️</div>
+                        <div>
+                            <h3 class="product-title">Insurance</h3>
+                            <p style="color: var(--medium-gray);">Integrated wealth-protection solutions</p>
+                        </div>
+                    </div>
+                    <div class="product-grid">
+                        <div class="opportunity-card">
+                            <h4 class="card-title">🚀 Opportunities</h4>
+                            <ul class="card-list">
+                                <li>Health & Wellness Products aligned with Budget healthcare initiatives</li>
+                                <li>Retirement Planning Solutions with MPF integration</li>
+                                <li>Cyber Insurance for digital transformation protection</li>
+                                <li>Longevity Solutions for aging population</li>
+                            </ul>
+                        </div>
+                        <div class="challenge-card">
+                            <h4 class="card-title">⚠️ Challenges</h4>
+                            <ul class="card-list">
+                                <li>Regulatory changes affecting product design</li>
+                                <li>Low interest rate environment impacting profitability</li>
+                                <li>Changing customer risk preferences</li>
+                                <li>Competition from insuretech startups</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HK Budget 2026 Section -->
+    <section class="budget-section" id="budget">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-tag">Policy Correlation</div>
+                <h2 class="section-title">HK Budget 2026 Strategic Alignment</h2>
+                <p class="section-desc">
+                    Key initiatives from the Hong Kong Budget 2026 that create opportunities
+                    for Hang Seng Bank's retail banking and wealth management business.
+                </p>
+            </div>
+
+            <div class="budget-grid">
+                <div class="budget-card scroll-reveal">
+                    <div class="budget-card-header">
+                        <div class="budget-icon">¥</div>
+                        <h3>RMB Internationalization</h3>
+                    </div>
+                    <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
+                        Doubling of the <span class="budget-highlight">RMB Business Facility to RMB 200 billion</span>
+                        to support trade and cross-boundary business.
+                    </p>
+                    <ul class="budget-list">
+                        <li>More convenient RMB forex quotations</li>
+                        <li>Regular RMB bond issuance</li>
+                        <li>Offshore RMB yield curve development</li>
+                        <li>Cross-boundary transaction growth</li>
+                    </ul>
+                </div>
+
+                <div class="budget-card scroll-reveal">
+                    <div class="budget-card-header">
+                        <div class="budget-icon">🏢</div>
+                        <h3>Family Office Hub</h3>
+                    </div>
+                    <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
+                        Over <span class="budget-highlight">3,300 single-family offices</span> in Hong Kong
+                        with enhanced tax regime for wealth management.
+                    </p>
+                    <ul class="budget-list">
+                        <li>Expanded "fund" scope for tax concessions</li>
+                        <li>Digital assets as qualifying investments</li>
+                        <li>Precious metals & commodities inclusion</li>
+                        <li>Effective from year of assessment 2025/26</li>
+                    </ul>
+                </div>
+
+                <div class="budget-card scroll-reveal">
+                    <div class="budget-card-header">
+                        <div class="budget-icon">🪙</div>
+                        <h3>Digital Assets</h3>
+                    </div>
+                    <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
+                        Comprehensive regulatory framework for <span class="budget-highlight">digital asset innovation</span>
+                        and licensing regime establishment.
+                    </p>
+                    <ul class="budget-list">
+                        <li>Licensing for digital asset dealing & custody</li>
+                        <li>Stablecoin licensing regime launch</li>
+                        <li>SFC accelerator for market innovation</li>
+                        <li>Project Ensemble for tokenized deposits</li>
+                    </ul>
+                </div>
+
+                <div class="budget-card scroll-reveal">
+                    <div class="budget-card-header">
+                        <div class="budget-icon">💵</div>
+                        <h3>Tax Relief Measures</h3>
+                    </div>
+                    <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
+                        <span class="budget-highlight">100% salaries tax reduction</span> up to $3,000 ceiling
+                        for year of assessment 2025/26.
+                    </p>
+                    <ul class="budget-list">
+                        <li>Basic allowance increase to $145,000</li>
+                        <li>Child allowance increase to $140,000</li>
+                        <li>Dependent parent allowance enhancements</li>
+                        <li>Profits tax reduction for businesses</li>
+                    </ul>
+                </div>
+
+                <div class="budget-card scroll-reveal">
+                    <div class="budget-card-header">
+                        <div class="budget-icon">🌱</div>
+                        <h3>Green Finance</h3>
+                    </div>
+                    <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
+                        Consolidating Hong Kong's status as an <span class="budget-highlight">international green finance centre</span>
+                        through sustainable initiatives.
+                    </p>
+                    <ul class="budget-list">
+                        <li>Hong Kong Taxonomy for Sustainable Finance</li>
+                        <li>Green transition planning guidance for banks</li>
+                        <li>Green Technology Projects Accelerator</li>
+                        <li>Sustainable bond issuance continuation</li>
+                    </ul>
+                </div>
+
+                <div class="budget-card scroll-reveal">
+                    <div class="budget-card-header">
+                        <div class="budget-icon">🏘️</div>
+                        <h3>REIT Market Development</h3>
+                    </div>
+                    <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
+                        Seeking <span class="budget-highlight">REIT inclusion under mutual-market access</span>
+                        with stamp duty waivers for property transfers.
+                    </p>
+                    <ul class="budget-list">
+                        <li>REIT privatisation/restructuring enablement</li>
+                        <li>Stamp duty waiver for non-residential transfers</li>
+                        <li>Enhanced REIT market liquidity</li>
+                        <li>Cross-border REIT investment facilitation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Recommendations Section -->
+    <section class="recommendations-section" id="recommendations">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-tag">Strategic Recommendations</div>
+                <h2 class="section-title">Action Plan for Hang Seng Bank</h2>
+                <p class="section-desc">
+                    Strategic initiatives and product recommendations to strengthen Hang Seng Bank's
+                    position in retail banking and wealth management.
+                </p>
+            </div>
+
+            <div class="rec-grid">
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">1</div>
+                    <h4>Launch "GBA Connect" Card</h4>
+                    <p>RMB-denominated credit card with cross-border benefits, targeting frequent travelers between Hong Kong and mainland China. Integrate with Greater Bay Area transportation and lifestyle merchants.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">Credit Card</span>
+                        <span class="rec-tag">GBA</span>
+                        <span class="rec-tag">RMB</span>
+                    </div>
+                </div>
+
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">2</div>
+                    <h4>Family Office Solution Platform</h4>
+                    <p>Comprehensive wealth management platform for family offices including custody, reporting, investment advisory, and intergenerational wealth transfer services.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">Wealth Management</span>
+                        <span class="rec-tag">Family Office</span>
+                        <span class="rec-tag">Ultra-HNW</span>
+                    </div>
+                </div>
+
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">3</div>
+                    <h4>Green Finance Product Suite</h4>
+                    <p>Expand green loan and mortgage offerings, develop sustainability-linked deposit products, and create green investment funds aligned with Hong Kong Taxonomy.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">ESG</span>
+                        <span class="rec-tag">Green Finance</span>
+                        <span class="rec-tag">Sustainability</span>
+                    </div>
+                </div>
+
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">4</div>
+                    <h4>Digital Asset Infrastructure</h4>
+                    <p>Apply for digital asset dealing and custody licenses, develop stablecoin payment solutions, and create regulated digital asset investment products for qualified investors.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">Digital Assets</span>
+                        <span class="rec-tag">Fintech</span>
+                        <span class="rec-tag">Innovation</span>
+                    </div>
+                </div>
+
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">5</div>
+                    <h4>GBA Multi-Currency Account</h4>
+                    <p>Integrated RMB/HKD/USD account with seamless cross-border transfer capabilities, targeting businesses and individuals with Greater Bay Area exposure.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">Deposits</span>
+                        <span class="rec-tag">Cross-border</span>
+                        <span class="rec-tag">Multi-currency</span>
+                    </div>
+                </div>
+
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">6</div>
+                    <h4>Robo-Advisory Platform</h4>
+                    <p>AI-powered digital wealth management platform for the mass affluent segment, offering automated portfolio management with ESG investment options.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">Digital</span>
+                        <span class="rec-tag">Wealth Tech</span>
+                        <span class="rec-tag">AI</span>
+                    </div>
+                </div>
+
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">7</div>
+                    <h4>"Budget Relief" Loan Product</h4>
+                    <p>Tax-season loan product tied to the Budget's tax relief timeline, offering preferential rates during tax payment periods to ease cash flow pressure.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">Personal Loan</span>
+                        <span class="rec-tag">Seasonal</span>
+                        <span class="rec-tag">Tax</span>
+                    </div>
+                </div>
+
+                <div class="rec-card scroll-reveal">
+                    <div class="rec-number">8</div>
+                    <h4>Retirement Plus Solution</h4>
+                    <p>Comprehensive retirement planning solution integrating MPF, annuities, long-term care insurance, and discretionary investment management for aging population.</p>
+                    <div class="rec-tags">
+                        <span class="rec-tag">Insurance</span>
+                        <span class="rec-tag">Retirement</span>
+                        <span class="rec-tag">Longevity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap Section -->
+    <section class="roadmap-section" id="roadmap">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-tag">Implementation</div>
+                <h2 class="section-title">24-Month Roadmap</h2>
+                <p class="section-desc">
+                    Phased approach to executing strategic initiatives and building competitive capabilities.
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 1</div>
+                        <h3 class="timeline-title">Foundation (Months 1-6)</h3>
+                        <ul class="timeline-list">
+                            <li>Upgrade core banking systems for digital asset readiness</li>
+                            <li>Recruit digital asset specialists and family office advisors</li>
+                            <li>Engage with HKMA and SFC on digital asset licensing</li>
+                            <li>Launch GBA multi-currency account</li>
+                            <li>Launch Green Time Deposit product</li>
+                            <li>Establish ESG research capabilities</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 2</div>
+                        <h3 class="timeline-title">Capability Building (Months 6-12)</h3>
+                        <ul class="timeline-list">
+                            <li>Apply for digital asset dealing and custody licenses</li>
+                            <li>Launch family office advisory services</li>
+                            <li>Deploy robo-advisory platform</li>
+                            <li>Establish fintech and ecosystem partnerships</li>
+                            <li>Introduce "GBA Connect" Card</li>
+                            <li>Launch Green Renovation Loan</li>
+                            <li>Obtain green finance certifications</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 3</div>
+                        <h3 class="timeline-title">Scale & Optimize (Months 12-24)</h3>
+                        <ul class="timeline-list">
+                            <li>Full suite of digital asset products for qualified investors</li>
+                            <li>Participate in tokenized deposit pilots (Project Ensemble)</li>
+                            <li>Launch comprehensive sustainable finance portfolio</li>
+                            <li>AI-powered personalized banking experience</li>
+                            <li>Expand GBA cross-border digital banking platform</li>
+                            <li>Launch Retirement Plus integrated solution</li>
+                            <li>Premium family office concierge services</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">H</div>
+                <div class="logo-text">HSBC <span>2025</span></div>
+            </div>
+            <p class="footer-text">
+                Analysis based on HSBC 2025 Annual Report and Hong Kong Budget 2026-27.<br>
+                Strategic recommendations for Hang Seng Bank Retail Banking and Wealth Management.
+            </p>
+            <p class="footer-date">Report prepared: March 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Product tabs functionality
+        const tabs = document.querySelectorAll('.product-tab');
+        const contents = document.querySelectorAll('.product-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Show corresponding content
+                const targetId = tab.getAttribute('data-tab');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Metric card counter animation
+        const animateValue = (obj, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = obj.innerHTML.replace(/[\d.]+/, (match) => {
+                    const value = (progress * (end - parseFloat(match)) + parseFloat(match)).toFixed(1);
+                    return value;
+                });
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Trigger animations when metrics section is visible
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.metric-value').forEach((metric, index) => {
+                        setTimeout(() => {
+                            metric.style.animation = 'fadeInUp 0.6s ease';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const metricsSection = document.querySelector('.metrics-section');
+        if (metricsSection) {
+            metricsObserver.observe(metricsSection);
+        }
+    </script>
+</body>
+</html>
