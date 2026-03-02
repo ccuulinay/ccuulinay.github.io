@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSBC 2025 Analysis | Hang Seng Bank Strategic Perspective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-deep: #0a1628;
+            --navy: #1a2744;
+            --navy-light: #2d3e5f;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --gold-dark: #9a7b1a;
+            --cream: #f5f3ee;
+            --white: #ffffff;
+            --text-muted: #8a9ab0;
+            --positive: #22c55e;
+            --negative: #ef4444;
+            --accent-copper: #b87333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--navy-deep);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 22, 40, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 50%, rgba(201, 162, 39, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 30%, rgba(184, 115, 51, 0.06) 0%, transparent 50%);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(201, 162, 39, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 162, 39, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 .highlight {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: rgba(201, 162, 39, 0.2);
+            z-index: -1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .hero-metric {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hero-metric:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-metric-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Crimson Text', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-desc {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* Executive Summary Cards */
+        .exec-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+
+        .exec-card {
+            background: linear-gradient(145deg, rgba(26, 39, 68, 0.8), rgba(10, 22, 40, 0.9));
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exec-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .exec-card:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .exec-card:hover::before {
+            opacity: 1;
+        }
+
+        .exec-card-large {
+            grid-column: span 8;
+        }
+
+        .exec-card-small {
+            grid-column: span 4;
+        }
+
+        .exec-card-full {
+            grid-column: span 12;
+        }
+
+        .exec-card h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold-light);
+        }
+
+        .exec-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .metric-row {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--gold);
+        }
+
+        .metric-value.positive {
+            color: var(--positive);
+        }
+
+        .metric-value.negative {
+            color: var(--negative);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Performance Section */
+        .performance-section {
+            background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .metric-card:hover {
+            border-color: rgba(201, 162, 39, 0.25);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .metric-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card-title {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-card-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .metric-card-trend.up {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--positive);
+        }
+
+        .metric-card-trend.down {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--negative);
+        }
+
+        .metric-card-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Segment Chart */
+        .segment-chart {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .segment-chart h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .segment-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .segment-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .segment-label {
+            width: 200px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .segment-track {
+            flex: 1;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .segment-fill {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: width 1.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .segment-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .segment-fill.cib {
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+            width: 38.1%;
+        }
+
+        .segment-fill.hk {
+            background: linear-gradient(90deg, var(--accent-copper), #d4956a);
+            width: 28.2%;
+        }
+
+        .segment-fill.uk {
+            background: linear-gradient(90deg, var(--navy-light), #4a5d7a);
+            width: 22.4%;
+        }
+
+        .segment-fill.iwpb {
+            background: linear-gradient(90deg, #2d5a3d, var(--positive));
+            width: 14.6%;
+        }
+
+        .segment-value {
+            width: 80px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--cream);
+        }
+
+        /* Product Analysis */
+        .product-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .product-tab {
+            padding: 0.875rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 100px;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .product-tab:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            color: var(--cream);
+        }
+
+        .product-tab.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy-deep);
+        }
+
+        .product-content {
+            display: none;
+        }
+
+        .product-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, rgba(26, 39, 68, 0.6), rgba(10, 22, 40, 0.8));
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            border-color: rgba(201, 162, 39, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .product-card h4 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--gold-light);
+        }
+
+        .product-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .product-stat {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .product-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+
+        .product-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .implications-box {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: rgba(201, 162, 39, 0.05);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .implications-box h5 {
+            font-size: 0.875rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .implications-box ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .implications-box li {
+            padding-left: 1.25rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .implications-box li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        /* Strategic Section */
+        .strategic-section {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.05) 0%, transparent 50%);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gold), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(-5px);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.5);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .timeline-content h4 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Competitive Landscape */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .competitor-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .competitor-card:hover {
+            border-color: rgba(201, 162, 39, 0.25);
+        }
+
+        .competitor-card.hsbc {
+            border-color: rgba(201, 162, 39, 0.4);
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .competitor-name {
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .competitor-badge {
+            padding: 0.25rem 0.75rem;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--gold);
+        }
+
+        .competitor-stats {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Challenges & Opportunities */
+        .challenges-section {
+            background: var(--navy);
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .challenges-col h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .challenges-col.challenges h3 {
+            color: var(--negative);
+        }
+
+        .challenges-col.opportunities h3 {
+            color: var(--positive);
+        }
+
+        .challenge-item, .opportunity-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-item:hover {
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.03);
+        }
+
+        .opportunity-item:hover {
+            border-color: rgba(34, 197, 94, 0.3);
+            background: rgba(34, 197, 94, 0.03);
+        }
+
+        .item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Recommendations */
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+
+        .rec-card {
+            background: linear-gradient(145deg, rgba(26, 39, 68, 0.8), rgba(10, 22, 40, 0.9));
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .rec-card:hover {
+            border-color: rgba(201, 162, 39, 0.35);
+            transform: translateY(-4px);
+        }
+
+        .rec-card.priority-1 {
+            grid-column: span 6;
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+
+        .rec-card.priority-2 {
+            grid-column: span 6;
+        }
+
+        .rec-card.priority-3 {
+            grid-column: span 4;
+        }
+
+        .rec-priority {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .rec-card h4 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.375rem;
+            margin-bottom: 1rem;
+        }
+
+        .rec-list {
+            list-style: none;
+        }
+
+        .rec-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .rec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rec-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        /* Outlook Section */
+        .outlook-section {
+            background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+        }
+
+        .targets-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .targets-table th,
+        .targets-table td {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .targets-table th {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .targets-table td {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .targets-table td strong {
+            color: var(--cream);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .targets-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--navy-deep);
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 2rem auto;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .exec-card-large,
+            .exec-card-small,
+            .exec-card-full {
+                grid-column: span 12;
+            }
+
+            .rec-card.priority-1,
+            .rec-card.priority-2,
+            .rec-card.priority-3 {
+                grid-column: span 12;
+            }
+
+            .challenges-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .segment-label {
+                width: 120px;
+                font-size: 0.75rem;
+            }
+
+            .segment-value {
+                width: 60px;
+                font-size: 0.75rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .metric-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">HANG SENG BANK</div>
+            <ul class="nav-links">
+                <li><a href="#executive">Executive Summary</a></li>
+                <li><a href="#performance">Performance</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#strategic">Strategic</a></li>
+                <li><a href="#landscape">Competition</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Strategic Analysis Report</div>
+            <h1>
+                HSBC 2025<br>
+                <span class="highlight">Annual Report</span> Analysis
+            </h1>
+            <p class="hero-subtitle">
+                From the perspective of Head of Retail Banking & Wealth Management, Hang Seng Bank
+            </p>
+            <div class="hero-metrics">
+                <div class="hero-metric">
+                    <div class="hero-metric-value">$29.9B</div>
+                    <div class="hero-metric-label">Reported PBT</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="hero-metric-value">+24%</div>
+                    <div class="hero-metric-label">Wealth Fee Growth</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="hero-metric-value">$13.7B</div>
+                    <div class="hero-metric-label">Hang Seng Acquisition</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section id="executive" class="executive-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">Overview</div>
+                <h2 class="section-title">Executive Summary</h2>
+                <p class="section-desc">HSBC's 2025 results reveal strength in wealth management and Hong Kong operations, with the landmark Hang Seng privatization reshaping our strategic relationship.</p>
+            </div>
+
+            <div class="exec-grid">
+                <div class="exec-card exec-card-large scroll-reveal">
+                    <h3>Financial Performance</h3>
+                    <p>HSBC delivered reported profit before tax of $29.9 billion, with underlying profit of $36.6 billion excluding notable items. The group demonstrated particular strength in wealth management (+24% fee income) and Hong Kong operations (+8% profit growth).</p>
+                    <div class="metric-row">
+                        <div class="metric-item">
+                            <div class="metric-value">$68.3B</div>
+                            <div class="metric-label">Revenue</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value positive">+5%</div>
+                            <div class="metric-label">YoY Growth</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">17.2%</div>
+                            <div class="metric-label">RoTE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exec-card exec-card-small scroll-reveal">
+                    <h3>Key Event</h3>
+                    <p>Hang Seng Bank privatization completed January 26, 2026, transforming our relationship from listed associate to wholly-owned subsidiary.</p>
+                    <div class="metric-row">
+                        <div class="metric-item">
+                            <div class="metric-value">$0.8B</div>
+                            <div class="metric-label">Annual Synergies</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exec-card exec-card-full scroll-reveal">
+                    <h3>Strategic Imperatives for Hang Seng</h3>
+                    <p>The competitive threat from HSBC is real – particularly their 35% wealth fee income advantage and massive physical expansion (27 new Wealth Centres). However, Hang Seng's local heritage, combined with strategic benefits of HSBC ownership, positions us to compete effectively with clear differentiation as "Hong Kong's Local Expert."</p>
+                    <div class="metric-row">
+                        <div class="metric-item">
+                            <div class="metric-value negative">-35%</div>
+                            <div class="metric-label">Wealth Fee Gap</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">64</div>
+                            <div class="metric-label">HSBC Wealth Centres</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value positive">25%</div>
+                            <div class="metric-label">Target Fee Growth</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Section -->
+    <section id="performance" class="performance-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">Financials</div>
+                <h2 class="section-title">HSBC Group Performance</h2>
+                <p class="section-desc">Strong underlying performance masked by notable items including restructuring costs and the Hang Seng acquisition.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-card-header">
+                        <span class="metric-card-title">Reported PBT</span>
+                        <span class="metric-card-trend down">↓ 8%</span>
+                    </div>
+                    <div class="metric-card-value">$29.9B</div>
+                    <div class="metric-card-subtitle">Including notable items</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-card-header">
+                        <span class="metric-card-title">Underlying PBT</span>
+                        <span class="metric-card-trend up">↑ 7%</span>
+                    </div>
+                    <div class="metric-card-value">$36.6B</div>
+                    <div class="metric-card-subtitle">Excluding notable items</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-card-header">
+                        <span class="metric-card-title">Return on Tangible Equity</span>
+                        <span class="metric-card-trend up">↑ 1.6pp</span>
+                    </div>
+                    <div class="metric-card-value">17.2%</div>
+                    <div class="metric-card-subtitle">Underlying basis</div>
+                </div>
+
+                <div class="metric-card scroll-reveal">
+                    <div class="metric-card-header">
+                        <span class="metric-card-title">Total Revenue</span>
+                        <span class="metric-card-trend up">↑ 5%</span>
+                    </div>
+                    <div class="metric-card-value">$71.0B</div>
+                    <div class="metric-card-subtitle">Excluding notable items</div>
+                </div>
+            </div>
+
+            <div class="segment-chart scroll-reveal">
+                <h3>Profit Contribution by Segment</h3>
+                <div class="segment-bars">
+                    <div class="segment-bar">
+                        <div class="segment-label">Corporate & Investment Banking</div>
+                        <div class="segment-track">
+                            <div class="segment-fill cib">38.1%</div>
+                        </div>
+                        <div class="segment-value">$11.4B</div>
+                    </div>
+                    <div class="segment-bar">
+                        <div class="segment-label">Hong Kong</div>
+                        <div class="segment-track">
+                            <div class="segment-fill hk">28.2%</div>
+                        </div>
+                        <div class="segment-value">$9.6B</div>
+                    </div>
+                    <div class="segment-bar">
+                        <div class="segment-label">United Kingdom</div>
+                        <div class="segment-track">
+                            <div class="segment-fill uk">22.4%</div>
+                        </div>
+                        <div class="segment-value">$6.7B</div>
+                    </div>
+                    <div class="segment-bar">
+                        <div class="segment-label">Int'l Wealth & Premier Banking</div>
+                        <div class="segment-track">
+                            <div class="segment-fill iwpb">14.6%</div>
+                        </div>
+                        <div class="segment-value">$4.4B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Analysis -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">Products</div>
+                <h2 class="section-title">Product-by-Product Analysis</h2>
+                <p class="section-desc">Deep dive into HSBC's retail banking and wealth management product performance.</p>
+            </div>
+
+            <div class="product-tabs scroll-reveal">
+                <button class="product-tab active" data-tab="deposits">Deposits</button>
+                <button class="product-tab" data-tab="lending">Lending & Cards</button>
+                <button class="product-tab" data-tab="wealth">Wealth & Investment</button>
+                <button class="product-tab" data-tab="insurance">Insurance</button>
+            </div>
+
+            <div id="deposits" class="product-content active">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h4>Global Deposits</h4>
+                        <p>HSBC maintains a highly liquid position with strong deposit growth driven by capital and wealth inflows, particularly in Hong Kong.</p>
+                        <div class="product-stats">
+                            <div class="product-stat">
+                                <div class="product-stat-value">$1,787B</div>
+                                <div class="product-stat-label">Total Deposits</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">+4%</div>
+                                <div class="product-stat-label">YoY Growth</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">55%</div>
+                                <div class="product-stat-label">Loan/Deposit Ratio</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">$540B+</div>
+                                <div class="product-stat-label">Hong Kong Deposits</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <h4>Hong Kong Market Position</h4>
+                        <div class="implications-box">
+                            <h5>Competitive Implications</h5>
+                            <ul>
+                                <li>HSBC's 25% HK market share represents formidable scale advantage</li>
+                                <li>$37B deposit growth suggests continued brand trust</li>
+                                <li>36% time deposit ratio indicates rate-sensitive customers</li>
+                                <li>Opportunity for Hang Seng with flexible products</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lending" class="product-content">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h4>Personal Lending Portfolio</h4>
+                        <p>HSBC maintains a conservative lending approach with 90% secured loans, representing one of the industry's most secured portfolios.</p>
+                        <div class="product-stats">
+                            <div class="product-stat">
+                                <div class="product-stat-value">$525B</div>
+                                <div class="product-stat-label">Total Loan Book</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">90%</div>
+                                <div class="product-stat-label">Secured Lending</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">81.4%</div>
+                                <div class="product-stat-label">Mortgages</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">4.4%</div>
+                                <div class="product-stat-label">Credit Cards</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <h4>Credit Quality</h4>
+                        <p>Extremely low LTV ratios and high credit quality ratings demonstrate HSBC's risk-averse approach to personal lending.</p>
+                        <div class="implications-box">
+                            <h5>Strategic Opportunity</h5>
+                            <ul>
+                                <li>HSBC's conservative approach leaves unsecured market open</li>
+                                <li>4.4% credit card penetration suggests de-emphasis</li>
+                                <li>Low LTVs (16-19%) allow room for competitive products</li>
+                                <li>Target credit-worthy customers seeking unsecured loans</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wealth" class="product-content">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h4>Wealth Management</h4>
+                        <p>The standout performer with 24% fee income growth, driven by strong market performance and net new money inflows across Asia.</p>
+                        <div class="product-stats">
+                            <div class="product-stat">
+                                <div class="product-stat-value">$9.4B</div>
+                                <div class="product-stat-label">Wealth Fee Income</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">+24%</div>
+                                <div class="product-stat-label">Fee Growth</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">$1,535B</div>
+                                <div class="product-stat-label">Invested Assets</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">1M</div>
+                                <div class="product-stat-label">Premier Customers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <h4>Asian Wealth Hub</h4>
+                        <p>Asia remains the growth engine with over $1 trillion in wealth balances and 40% fee growth in Hong Kong specifically.</p>
+                        <div class="implications-box">
+                            <h5>Critical Gap</h5>
+                            <ul>
+                                <li>HSBC's wealth fee per customer 35% higher than Hang Seng</li>
+                                <li>64 Wealth Centres vs Hang Seng's limited network</li>
+                                <li>275,000 new affluent clients added in 2025</li>
+                                <li>Urgent need to close capability gap</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="insurance" class="product-content">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h4>Insurance Manufacturing</h4>
+                        <p>Insurance emerged as the fastest-growing wealth component with 49% fee growth and a substantial CSM balance.</p>
+                        <div class="product-stats">
+                            <div class="product-stat">
+                                <div class="product-stat-value">$14.6B</div>
+                                <div class="product-stat-label">CSM Balance</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">+49%</div>
+                                <div class="product-stat-label">Fee Growth</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">Q4'25</div>
+                                <div class="product-stat-label">Peak Quarter</div>
+                            </div>
+                            <div class="product-stat">
+                                <div class="product-stat-value">+20%</div>
+                                <div class="product-stat-label">CSM YoY</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <h4>Bancassurance Integration</h4>
+                        <p>HSBC's insurance manufacturing capability creates a significant competitive moat and customer retention tool.</p>
+                        <div class="implications-box">
+                            <h5>Hang Seng Response</h5>
+                            <ul>
+                                <li>Manufacturing capability is key differentiator</li>
+                                <li>Strengthen bancassurance partnerships urgently</li>
+                                <li>49% growth indicates underpenetrated market</li>
+                                <li>Consider developing manufacturing capabilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Developments -->
+    <section id="strategic" class="strategic-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">M&A</div>
+                <h2 class="section-title">Strategic Developments</h2>
+                <p class="section-desc">The landmark Hang Seng Bank privatization fundamentally reshapes our strategic relationship.</p>
+            </div>
+
+            <div class="timeline scroll-reveal">
+                <div class="timeline-item">
+                    <div class="timeline-date">October 2025</div>
+                    <div class="timeline-content">
+                        <h4>Privatization Announcement</h4>
+                        <p>HSBC announced the $13.7 billion acquisition to take Hang Seng Bank private, removing the minority shareholder structure that had existed for decades. The strategic rationale: "Capture growth in the high-returning Hong Kong market."</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">January 26, 2026</div>
+                    <div class="timeline-content">
+                        <h4>Deal Completion</h4>
+                        <p>Privatization completed ahead of schedule. Hang Seng delisted from HKEX. HSBC now operates two fully-owned banks in Hong Kong, positioning to capture growth with a dual-bank strategy.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026-2028</div>
+                    <div class="timeline-content">
+                        <h4>Integration & Synergies</h4>
+                        <p>Expected $0.8 billion in annual synergies ($0.3bn cost, $0.5bn revenue). Removes $3.8bn minority capital inefficiency. HSBC raised RoTE target to 17%+ partly enabled by this acquisition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Landscape -->
+    <section id="landscape" class="landscape-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">Market</div>
+                <h2 class="section-title">Competitive Landscape</h2>
+                <p class="section-desc">Hong Kong retail banking market structure and key competitive dynamics.</p>
+            </div>
+
+            <div class="competitor-grid">
+                <div class="competitor-card hsbc scroll-reveal">
+                    <div class="competitor-header">
+                        <span class="competitor-name">HSBC</span>
+                        <span class="competitor-badge">Market Leader</span>
+                    </div>
+                    <div class="competitor-stats">
+                        <strong>$16.6B</strong> Hong Kong PBT<br>
+                        <strong>25%</strong> Deposit Market Share<br>
+                        <strong>$540B+</strong> Hong Kong Deposits<br>
+                        <strong>35.5%</strong> Hong Kong RoTE
+                    </div>
+                </div>
+
+                <div class="competitor-card scroll-reveal">
+                    <div class="competitor-header">
+                        <span class="competitor-name">Hang Seng Bank</span>
+                        <span class="competitor-badge">Top 3-4</span>
+                    </div>
+                    <div class="competitor-stats">
+                        <strong>HKD 291.5B</strong> Market Cap<br>
+                        Strong retail franchise<br>
+                        90-year Hong Kong heritage<br>
+                        Now wholly-owned by HSBC
+                    </div>
+                </div>
+
+                <div class="competitor-card scroll-reveal">
+                    <div class="competitor-header">
+                        <span class="competitor-name">BOCHK</span>
+                        <span class="competitor-badge">Major Competitor</span>
+                    </div>
+                    <div class="competitor-stats">
+                        <strong>HKD 28.6B</strong> Net Profit (2024)<br>
+                        Robust retail network<br>
+                        Strong GBA presence<br>
+                        Mainland backing
+                    </div>
+                </div>
+
+                <div class="competitor-card scroll-reveal">
+                    <div class="competitor-header">
+                        <span class="competitor-name">Virtual Banks</span>
+                        <span class="competitor-badge">Disruptors</span>
+                    </div>
+                    <div class="competitor-stats">
+                        <strong>ZA Bank:</strong> 600,000+ customers<br>
+                        <strong>Fusion Bank</strong> & <strong>Mox Bank</strong><br>
+                        Digital-first, low fees<br>
+                        Superior UX pressure
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges & Opportunities -->
+    <section id="challenges" class="challenges-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">SWOT</div>
+                <h2 class="section-title">Challenges & Opportunities</h2>
+                <p class="section-desc">Key strategic factors shaping Hang Seng Bank's competitive position.</p>
+            </div>
+
+            <div class="challenges-grid">
+                <div class="challenges-col challenges scroll-reveal">
+                    <h3>⚠️ Challenges</h3>
+                    <div class="challenge-item">
+                        <div class="item-title">35% Wealth Fee Income Gap</div>
+                        <div class="item-desc">HSBC's per-customer wealth fee income significantly higher and widening</div>
+                    </div>
+                    <div class="challenge-item">
+                        <div class="item-title">Physical Network Disadvantage</div>
+                        <div class="item-desc">HSBC opened 27 new Wealth Centres, bringing total to 64 across Asia</div>
+                    </div>
+                    <div class="challenge-item">
+                        <div class="item-title">Virtual Bank Disruption</div>
+                        <div class="item-desc">Digital-only banks gaining share through superior UX and lower fees</div>
+                    </div>
+                    <div class="challenge-item">
+                        <div class="item-title">Brand Perception Gap</div>
+                        <div class="item-desc">HSBC's global brand recognition vs Hang Seng's local focus</div>
+                    </div>
+                    <div class="challenge-item">
+                        <div class="item-title">Integration Risk</div>
+                        <div class="item-desc">Risk of identity loss within HSBC group post-privatization</div>
+                    </div>
+                </div>
+
+                <div class="challenges-col opportunities scroll-reveal">
+                    <h3>✓ Opportunities</h3>
+                    <div class="opportunity-item">
+                        <div class="item-title">Unsecured Lending Market</div>
+                        <div class="item-desc">HSBC's 90% secured focus leaves room for unsecured products</div>
+                    </div>
+                    <div class="opportunity-item">
+                        <div class="item-title">Credit Card Acquisition</div>
+                        <div class="item-desc">Only 4.4% of HSBC lending - major growth opportunity</div>
+                    </div>
+                    <div class="opportunity-item">
+                        <div class="item-title">Insurance Growth</div>
+                        <div class="item-desc">49% fee growth trend suggests underpenetrated market</div>
+                    </div>
+                    <div class="opportunity-item">
+                        <div class="item-title">HSBC Synergies</div>
+                        <div class="item-desc">$0.8B annual synergies to leverage shared infrastructure</div>
+                    </div>
+                    <div class="opportunity-item">
+                        <div class="item-title">Local Expertise Positioning</div>
+                        <div class="item-desc">"Hong Kong's Local Expert" vs HSBC's global complexity</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section id="recommendations" class="recommendations-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">Strategy</div>
+                <h2 class="section-title">Strategic Recommendations</h2>
+                <p class="section-desc">Actionable strategies for Hang Seng Bank to compete effectively post-privatization.</p>
+            </div>
+
+            <div class="rec-grid">
+                <div class="rec-card priority-1 scroll-reveal">
+                    <div class="rec-priority">Priority 1</div>
+                    <h4>Close the Wealth Gap</h4>
+                    <ul class="rec-list">
+                        <li>Accelerate wealth platform investments</li>
+                        <li>Expand insurance manufacturing/partnership capabilities</li>
+                        <li>Target 30%+ wealth fee income growth annually</li>
+                        <li>Build hybrid digital-human advisory model</li>
+                        <li>Leverage HSBC's global product shelf access</li>
+                    </ul>
+                </div>
+
+                <div class="rec-card priority-1 scroll-reveal">
+                    <div class="rec-priority">Priority 2</div>
+                    <h4>Unsecured Lending Growth</h4>
+                    <ul class="rec-list">
+                        <li>Launch competitive unsecured personal loan products</li>
+                        <li>Aggressive credit card customer acquisition</li>
+                        <li>Target 10%+ credit card market share</li>
+                        <li>Focus on young professionals segment</li>
+                        <li>Exploit HSBC's conservative positioning</li>
+                    </ul>
+                </div>
+
+                <div class="rec-card priority-3 scroll-reveal">
+                    <div class="rec-priority">Priority 3</div>
+                    <h4>Differentiation Strategy</h4>
+                    <ul class="rec-list">
+                        <li>Position as "Hong Kong's Local Expert"</li>
+                        <li>Leverage 90-year heritage vs HSBC global</li>
+                        <li>Target mass affluent ($500K-$5M) segment</li>
+                    </ul>
+                </div>
+
+                <div class="rec-card priority-3 scroll-reveal">
+                    <div class="rec-priority">Priority 3</div>
+                    <h4>Digital Excellence</h4>
+                    <ul class="rec-list">
+                        <li>Match or exceed virtual bank UX</li>
+                        <li>Launch AI-powered advisory tools</li>
+                        <li>Seamless cross-border GBA banking</li>
+                    </ul>
+                </div>
+
+                <div class="rec-card priority-3 scroll-reveal">
+                    <div class="rec-priority">Priority 3</div>
+                    <h4>Operational Synergies</h4>
+                    <ul class="rec-list">
+                        <li>Negotiate HSBC product shelf access</li>
+                        <li>Share technology infrastructure</li>
+                        <li>Branch co-location opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outlook -->
+    <section id="outlook" class="outlook-section">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">Targets</div>
+                <h2 class="section-title">2026-2028 Outlook</h2>
+                <p class="section-desc">Recommended targets for Hang Seng Bank aligned with HSBC Group strategy.</p>
+            </div>
+
+            <table class="targets-table scroll-reveal">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>HSBC Group Target</th>
+                        <th>Hang Seng Recommended Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Return on Tangible Equity</td>
+                        <td><strong>17%+</strong></td>
+                        <td><strong>15-16%</strong> (leveraging synergies)</td>
+                    </tr>
+                    <tr>
+                        <td>Revenue Growth</td>
+                        <td>Building to <strong>5%</strong> by 2028</td>
+                        <td><strong>8-10%</strong> (above-market growth)</td>
+                    </tr>
+                    <tr>
+                        <td>Wealth Fee Income Growth</td>
+                        <td>Market leading</td>
+                        <td><strong>25-30%</strong> annually</td>
+                    </tr>
+                    <tr>
+                        <td>Unsecured Lending Growth</td>
+                        <td>N/A</td>
+                        <td><strong>15%</strong> annually</td>
+                    </tr>
+                    <tr>
+                        <td>Digital Customer Penetration</td>
+                        <td>Industry leading</td>
+                        <td><strong>80%+</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Cost-to-Income Ratio</td>
+                        <td>Improving</td>
+                        <td><strong>&lt;45%</strong> (synergy leverage)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">HANG SENG BANK</div>
+            <p class="footer-text">
+                Strategic Analysis Report: HSBC 2025 Annual Report<br>
+                Prepared by Retail Banking & Wealth Management Strategy<br>
+                March 2, 2026
+            </p>
+            <div class="footer-divider"></div>
+            <p class="footer-text">
+                Sources: HSBC Holdings plc Annual Results 2025, WealthBriefing Asia, Morningstar,<br>
+                Asian Private Banker, The Asian Banker, SEC EDGAR filings
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.product-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active from all tabs
+                document.querySelectorAll('.product-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.product-content').forEach(c => c.classList.remove('active'));
+
+                // Add active to clicked tab
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navigation scroll effect
+        const nav = document.querySelector('.nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(10, 22, 40, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 22, 40, 0.9)';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
