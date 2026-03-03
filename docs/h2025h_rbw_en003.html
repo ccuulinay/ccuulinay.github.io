@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSBC 2025 Analysis | Hang Seng Bank Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-deep: #0a1628;
+            --navy-mid: #1a2d4a;
+            --navy-light: #2d4566;
+            --gold-primary: #c9a227;
+            --gold-light: #e8d5a3;
+            --gold-dark: #9a7b1a;
+            --white: #ffffff;
+            --cream: #faf8f5;
+            --gray-light: #f5f5f5;
+            --gray-text: #6b7280;
+            --success: #059669;
+            --danger: #dc2626;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--cream);
+            color: var(--navy-deep);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+            z-index: 1000;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-subtitle {
+            font-size: 0.75rem;
+            color: var(--gold-light);
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            border-radius: 8px;
+            transition: all 0.3s var(--transition-smooth);
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--white);
+            background: rgba(201, 162, 39, 0.1);
+            border-left-color: var(--gold-primary);
+        }
+
+        .nav-link.active {
+            font-weight: 500;
+        }
+
+        .nav-progress {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1100;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--navy-deep);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 0;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .progress-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+            width: 0%;
+            transition: width 0.5s var(--transition-smooth);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 4rem 5rem;
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+        .slide.animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .slide.animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-header {
+            margin-bottom: 3rem;
+        }
+
+        .slide-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--navy-deep);
+            line-height: 1.2;
+        }
+
+        .slide-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-text);
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+
+        /* Hero Slide */
+        .hero-slide {
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
+            position: relative;
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(201, 162, 39, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 50px;
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--gold-primary);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hero-meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-meta-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.06);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            transition: all 0.4s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+            transform: scaleX(0);
+            transition: transform 0.4s var(--transition-smooth);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(10, 22, 40, 0.12);
+        }
+
+        .metric-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--gray-text);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .metric-trend.positive {
+            background: rgba(5, 150, 105, 0.1);
+            color: var(--success);
+        }
+
+        .metric-trend.negative {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--danger);
+        }
+
+        .metric-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--navy-deep);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-context {
+            font-size: 0.9rem;
+            color: var(--gray-text);
+        }
+
+        /* Data Tables */
+        .data-table-container {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.06);
+            margin: 2rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+        }
+
+        .data-table th {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+        }
+
+        .data-table td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+        }
+
+        .data-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(201, 162, 39, 0.03);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table .value {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .data-table .change {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .data-table .change.positive {
+            color: var(--success);
+        }
+
+        .data-table .change.negative {
+            color: var(--danger);
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.06);
+            border: 1px solid rgba(201, 162, 39, 0.08);
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(10, 22, 40, 0.1);
+            border-color: rgba(201, 162, 39, 0.2);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.2) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--navy-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gold-primary) 0%, var(--gold-light) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            transform: translateX(-5px);
+            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.2);
+        }
+
+        .timeline-phase {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--navy-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-content {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        .timeline-list {
+            list-style: none;
+            margin-top: 0.75rem;
+        }
+
+        .timeline-list li {
+            padding: 0.35rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--navy-mid);
+        }
+
+        .timeline-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold-primary);
+            font-weight: 600;
+        }
+
+        /* Callout Box */
+        .callout {
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .callout::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.1) 0%, transparent 70%);
+        }
+
+        .callout-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .callout-text {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Two Column Layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .column-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--navy-deep);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--gold-primary);
+            display: inline-block;
+        }
+
+        .column-list {
+            list-style: none;
+        }
+
+        .column-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+            color: var(--navy-mid);
+        }
+
+        .column-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.1rem;
+            width: 6px;
+            height: 6px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+        }
+
+        .column-list.opportunities li::before {
+            background: var(--success);
+        }
+
+        .column-list.challenges li::before {
+            background: var(--danger);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.06);
+        }
+
+        .stats-item {
+            text-align: center;
+            padding: 0 1.5rem;
+            position: relative;
+        }
+
+        .stats-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            width: 1px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .stats-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--navy-deep);
+            line-height: 1;
+        }
+
+        .stats-value span {
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+        }
+
+        .stats-label {
+            font-size: 0.85rem;
+            color: var(--gray-text);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--gray-text);
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--navy-deep);
+        }
+
+        /* Scroll Navigation */
+        .scroll-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 100;
+        }
+
+        .scroll-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(201, 162, 39, 0.3);
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            border: 2px solid transparent;
+        }
+
+        .scroll-dot:hover, .scroll-dot.active {
+            background: var(--gold-primary);
+            transform: scale(1.3);
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .nav-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s var(--transition-smooth);
+                z-index: 1050;
+            }
+
+            .nav-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .slide {
+                padding: 5rem 2rem 3rem 2rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+
+            .stats-item {
+                flex: 1;
+                min-width: 150px;
+            }
+
+            .stats-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .scroll-nav {
+                right: 1rem;
+            }
+
+            .nav-buttons {
+                right: 1rem;
+                bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s var(--transition-smooth) forwards;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.06);
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .chart-label {
+            width: 120px;
+            font-size: 0.85rem;
+            color: var(--gray-text);
+            font-weight: 500;
+        }
+
+        .chart-track {
+            flex: 1;
+            height: 32px;
+            background: var(--gray-light);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .chart-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--navy-mid), var(--navy-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.75rem;
+            transition: width 1s var(--transition-smooth);
+        }
+
+        .chart-fill.highlight {
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-primary));
+        }
+
+        .chart-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.75rem;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--navy-deep);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .nav-btn:hover {
+            background: var(--gold-primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Navigation Sidebar -->
+    <nav class="nav-sidebar">
+        <div class="nav-logo">HSBC 2025 Analysis</div>
+        <div class="nav-subtitle">Strategic Report</div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#hero" class="nav-link active">Overview</a></li>
+            <li class="nav-item"><a href="#executive" class="nav-link">Executive Summary</a></li>
+            <li class="nav-item"><a href="#market" class="nav-link">Market Context</a></li>
+            <li class="nav-item"><a href="#performance" class="nav-link">Financial Performance</a></li>
+            <li class="nav-item"><a href="#products" class="nav-link">Product Analysis</a></li>
+            <li class="nav-item"><a href="#budget" class="nav-link">HK Budget 2026</a></li>
+            <li class="nav-item"><a href="#opportunities" class="nav-link">Opportunities</a></li>
+            <li class="nav-item"><a href="#recommendations" class="nav-link">Strategic Recommendations</a></li>
+            <li class="nav-item"><a href="#roadmap" class="nav-link">Implementation Roadmap</a></li>
+            <li class="nav-item"><a href="#conclusion" class="nav-link">Conclusion</a></li>
+        </ul>
+        <div class="nav-progress">
+            <div class="progress-label">Progress</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scroll Navigation Dots -->
+    <div class="scroll-nav">
+        <div class="scroll-dot active" data-slide="hero"></div>
+        <div class="scroll-dot" data-slide="executive"></div>
+        <div class="scroll-dot" data-slide="market"></div>
+        <div class="scroll-dot" data-slide="performance"></div>
+        <div class="scroll-dot" data-slide="products"></div>
+        <div class="scroll-dot" data-slide="budget"></div>
+        <div class="scroll-dot" data-slide="opportunities"></div>
+        <div class="scroll-dot" data-slide="recommendations"></div>
+        <div class="scroll-dot" data-slide="roadmap"></div>
+        <div class="scroll-dot" data-slide="conclusion"></div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prevBtn" title="Previous Slide">←</button>
+        <button class="nav-btn" id="nextBtn" title="Next Slide">→</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Slide -->
+        <section class="slide hero-slide" id="hero">
+            <div class="hero-content">
+                <div class="hero-badge">Hang Seng Bank Strategy</div>
+                <h1 class="hero-title">HSBC 2025 Annual Report <span>Analysis</span></h1>
+                <p class="hero-subtitle">Strategic insights and recommendations for Retail Banking and Wealth Management from HSBC's 2025 performance and Hong Kong Budget 2026</p>
+                <div class="hero-meta">
+                    <div class="hero-meta-item">
+                        <span class="hero-meta-label">Report Date</span>
+                        <span class="hero-meta-value">March 2026</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <span class="hero-meta-label">Analysis Period</span>
+                        <span class="hero-meta-value">FY 2025</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <span class="hero-meta-label">Target Audience</span>
+                        <span class="hero-meta-value">Retail & Wealth</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Summary -->
+        <section class="slide" id="executive">
+            <div class="slide-header">
+                <div class="slide-label">Section 01</div>
+                <h2 class="slide-title">Executive Summary</h2>
+                <p class="slide-subtitle">Key findings from HSBC's 2025 performance and strategic implications for Hang Seng Bank</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Group Profit (Ex-Notable Items)</span>
+                        <span class="metric-trend positive">↑ 7%</span>
+                    </div>
+                    <div class="metric-value">$36.6bn</div>
+                    <div class="metric-context">Strong underlying growth excluding one-time items</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Hong Kong Contribution</span>
+                        <span class="metric-trend positive">40%</span>
+                    </div>
+                    <div class="metric-value">$9.6bn</div>
+                    <div class="metric-context">PBT with 25.4% deposit market share</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Global Wealth Balances</span>
+                        <span class="metric-trend positive">↑ 16%</span>
+                    </div>
+                    <div class="metric-value">$2.14tn</div>
+                    <div class="metric-context">Driven by strong net new asset flows</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Hong Kong Wealth Balances</span>
+                        <span class="metric-trend positive">↑ 16%</span>
+                    </div>
+                    <div class="metric-value">$1.18tn</div>
+                    <div class="metric-context">$39bn net new invested assets</div>
+                </div>
+            </div>
+
+            <div class="callout">
+                <h3 class="callout-title">Strategic Imperative</h3>
+                <p class="callout-text">Despite reported profit declining 7% due to notable items, HSBC's underlying profit excluding notable items grew 7% to $36.6bn. Hong Kong remains the crown jewel, contributing 40% of Group profit while maintaining the #1 deposit market position. The convergence of RMB internationalization, digital asset innovation, and GBA integration creates a favorable backdrop for Hang Seng Bank's strategic expansion.</p>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 1 of 10</span>
+            </div>
+        </section>
+
+        <!-- Market Context -->
+        <section class="slide" id="market">
+            <div class="slide-header">
+                <div class="slide-label">Section 02</div>
+                <h2 class="slide-title">Market Context</h2>
+                <p class="slide-subtitle">Global economic environment and Hong Kong banking landscape</p>
+            </div>
+
+            <div class="two-columns">
+                <div class="column">
+                    <h3 class="column-title">Global Drivers</h3>
+                    <ul class="column-list opportunities">
+                        <li>AI capital expenditure driving tech investment</li>
+                        <li>Resilient US consumer spending</li>
+                        <li>Robust ASEAN consumption and exports</li>
+                        <li>Middle East infrastructure investments</li>
+                        <li>RMB internationalization acceleration</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="column-title">Key Challenges</h3>
+                    <ul class="column-list challenges">
+                        <li>Geopolitical uncertainty and trade tensions</li>
+                        <li>Commercial real estate market pressures</li>
+                        <li>Divergent regulatory standards globally</li>
+                        <li>Interest rate margin compression</li>
+                        <li>Virtual bank competition intensifying</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stats-item">
+                    <div class="stats-value">25.4<span>%</span></div>
+                    <div class="stats-label">Deposit Market Share</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">7<span>M+</span></div>
+                    <div class="stats-label">Total Customers</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">1.1<span>M</span></div>
+                    <div class="stats-label">New Customers 2025</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">35.5<span>%</span></div>
+                    <div class="stats-label">Hong Kong RoTE</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--navy-deep);">Hong Kong Performance Highlights (2025)</h3>
+                <div class="chart-bar">
+                    <span class="chart-label">Revenue</span>
+                    <div class="chart-track">
+                        <div class="chart-fill highlight" style="width: 85%;"><span class="chart-value">$15.9bn (+6%)</span></div>
+                    </div>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">PBT</span>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 75%;"><span class="chart-value">$9.6bn (+5%)</span></div>
+                    </div>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">Fee Income</span>
+                    <div class="chart-track">
+                        <div class="chart-fill highlight" style="width: 65%;"><span class="chart-value">$3.8bn (+24%)</span></div>
+                    </div>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">Wealth Fees</span>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 55%;"><span class="chart-value">$2.2bn (+40%)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 2 of 10</span>
+            </div>
+        </section>
+
+        <!-- Financial Performance -->
+        <section class="slide" id="performance">
+            <div class="slide-header">
+                <div class="slide-label">Section 03</div>
+                <h2 class="slide-title">Financial Performance</h2>
+                <p class="slide-subtitle">Group results and segment analysis</p>
+            </div>
+
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>2025</th>
+                            <th>2024</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Group PBT (Reported)</td>
+                            <td class="value">$29.9bn</td>
+                            <td class="value">$32.3bn</td>
+                            <td class="change negative">-7%</td>
+                        </tr>
+                        <tr>
+                            <td>Group PBT (Ex-Notable Items)</td>
+                            <td class="value">$36.6bn</td>
+                            <td class="value">$34.2bn</td>
+                            <td class="change positive">+7%</td>
+                        </tr>
+                        <tr>
+                            <td>Hong Kong PBT</td>
+                            <td class="value">$9.6bn</td>
+                            <td class="value">$9.1bn</td>
+                            <td class="change positive">+5%</td>
+                        </tr>
+                        <tr>
+                            <td>IWPB PBT</td>
+                            <td class="value">$4.4bn</td>
+                            <td class="value">$4.0bn</td>
+                            <td class="change positive">+10%</td>
+                        </tr>
+                        <tr>
+                            <td>Net Interest Income</td>
+                            <td class="value">$34.8bn</td>
+                            <td class="value">$32.7bn</td>
+                            <td class="change positive">+6%</td>
+                        </tr>
+                        <tr>
+                            <td>Wealth Fee Income</td>
+                            <td class="value">$6.8bn</td>
+                            <td class="value">$5.6bn</td>
+                            <td class="change positive">+22%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <h3 class="callout-title">Notable Items Impact (2025)</h3>
+                <p class="callout-text">Reported profit of $29.9bn reflects $4.9bn net adverse impact from notable items: BoCom impairment ($2.1bn), French portfolio reserve recycling ($1.5bn), legal provisions ($1.4bn), and restructuring costs ($1.0bn). Excluding these, underlying profit demonstrates strong operational momentum with 7% growth.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">IWPB Revenue</span>
+                        <span class="metric-trend positive">↑ 5%</span>
+                    </div>
+                    <div class="metric-value">$14.5bn</div>
+                    <div class="metric-context">International Wealth & Premier Banking</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">IWPB RoTE</span>
+                        <span class="metric-trend positive">↑ 210bps</span>
+                    </div>
+                    <div class="metric-value">17.8%</div>
+                    <div class="metric-context">Significant margin improvement</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Group Revenue</span>
+                        <span class="metric-trend positive">↑ 4%</span>
+                    </div>
+                    <div class="metric-value">$68.3bn</div>
+                    <div class="metric-context">Diversified income streams</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Insurance Revenue</span>
+                        <span class="metric-trend positive">↑ 35%</span>
+                    </div>
+                    <div class="metric-value">$2.3bn</div>
+                    <div class="metric-context">Strong CSM release growth</div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 3 of 10</span>
+            </div>
+        </section>
+
+        <!-- Product Analysis -->
+        <section class="slide" id="products">
+            <div class="slide-header">
+                <div class="slide-label">Section 04</div>
+                <h2 class="slide-title">Product Analysis</h2>
+                <p class="slide-subtitle">Deep dive into retail banking and wealth management products</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3 class="feature-title">Credit Cards</h3>
+                    <p class="feature-text">Digital-first card propositions with "Funds on Mobile" launch enabling seamless fund trading via mobile app. Opportunity for GBA Connect cards targeting cross-border travelers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏦</div>
+                    <h3 class="feature-title">Personal Loans</h3>
+                    <p class="feature-text">Stable performance with 70% average LTV on new Hong Kong mortgages. Forborne loans at $592M total. Green renovation loans aligned with government sustainability goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Deposits</h3>
+                    <p class="feature-text">Hong Kong deposit base grew 7% to $540bn+. Wealth deposits at $407bn in HK. Opportunity in tokenized deposits via Project Ensemble and RMB products.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Investment Services</h3>
+                    <p class="feature-text">$2.14tn global wealth balances (+16%). 29 new Wealth Centres opened. Premier 3.0 live in 7 markets. Focus on family office services for 3,300+ offices in HK.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Insurance</h3>
+                    <p class="feature-text">$2.3bn revenue with strong CSM growth. Bancassurance model driving efficiency. Opportunities in longevity solutions, cyber insurance, and cross-border health coverage.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌏</div>
+                    <h3 class="feature-title">GBA Integration</h3>
+                    <p class="feature-text">Cross-boundary wealth management connect expansion. RMB internationalization creating product opportunities. Hong Kong positioned as conduit for mainland/international customers.</p>
+                </div>
+            </div>
+
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Wealth Balances Category</th>
+                            <th>2025 ($bn)</th>
+                            <th>2024 ($bn)</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Private Bank Invested Assets</td>
+                            <td class="value">465</td>
+                            <td class="value">395</td>
+                            <td class="change positive">+18%</td>
+                        </tr>
+                        <tr>
+                            <td>Retail Invested Assets</td>
+                            <td class="value">490</td>
+                            <td class="value">409</td>
+                            <td class="change positive">+20%</td>
+                        </tr>
+                        <tr>
+                            <td>Asset Management (Third-Party)</td>
+                            <td class="value">580</td>
+                            <td class="value">489</td>
+                            <td class="change positive">+19%</td>
+                        </tr>
+                        <tr>
+                            <td>Wealth Deposits</td>
+                            <td class="value">608</td>
+                            <td class="value">555</td>
+                            <td class="change positive">+10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 4 of 10</span>
+            </div>
+        </section>
+
+        <!-- HK Budget 2026 -->
+        <section class="slide" id="budget">
+            <div class="slide-header">
+                <div class="slide-label">Section 05</div>
+                <h2 class="slide-title">HK Budget 2026 Implications</h2>
+                <p class="slide-subtitle">Key initiatives and strategic opportunities from the Hong Kong Budget 2026-27</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">¥</div>
+                    <h3 class="feature-title">RMB Internationalization</h3>
+                    <p class="feature-text">RMB Business Facility doubled to RMB 200bn. Enhanced forex quotations for RMB/regional currencies. Regular RMB bond issuance to enrich offshore market.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3 class="feature-title">Family Office Hub</h3>
+                    <p class="feature-text">3,300+ single-family offices in Hong Kong. Tax regime enhancements for funds-of-one. Digital assets, precious metals now qualifying investments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3 class="feature-title">REIT Market Development</h3>
+                    <p class="feature-text">Mutual market access inclusion for REITs. Amendment bill for REIT privatization/restructuring. Stamp duty waiver for non-residential transfers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3 class="feature-title">Digital Asset Licensing</h3>
+                    <p class="feature-text">Licensing regime for dealing and custodian services. Fiat-referenced stablecoin licenses to be issued. SFC accelerator for market innovation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🪙</div>
+                    <h3 class="feature-title">Project Ensemble</h3>
+                    <p class="feature-text">HKMA pilot for tokenized deposits and digital assets. 24/7 settlement capability development. Local standards for interoperability.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3 class="feature-title">Green Finance</h3>
+                    <p class="feature-text">Sustainable finance cumulative: $495.6bn. Hong Kong Taxonomy refinement. Green transition planning guidance for banks. Green Technology Accelerator.</p>
+                </div>
+            </div>
+
+            <div class="callout">
+                <h3 class="callout-title">Tax Relief Measures</h3>
+                <p class="callout-text">Salaries tax reduction: 100% up to $3,000 ceiling. Profits tax reduction: 100% up to $3,000 ceiling. Basic allowance increased from $132,000 to $145,000 from 2026/27. Child allowance increased to $140,000. Strategic opportunity for tax-season promotional campaigns and tax-optimized investment products.</p>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 5 of 10</span>
+            </div>
+        </section>
+
+        <!-- Opportunities & Challenges -->
+        <section class="slide" id="opportunities">
+            <div class="slide-header">
+                <div class="slide-label">Section 06</div>
+                <h2 class="slide-title">Opportunities & Challenges</h2>
+                <p class="slide-subtitle">Strategic landscape analysis for Hang Seng Bank</p>
+            </div>
+
+            <div class="two-columns">
+                <div class="column">
+                    <h3 class="column-title">Strategic Opportunities</h3>
+                    <ul class="column-list opportunities">
+                        <li><strong>Greater Bay Area Integration</strong> — Cross-boundary wealth management expansion and RMB product opportunities</li>
+                        <li><strong>Digital Transformation</strong> — Project Ensemble, digital assets, AI-powered customer service</li>
+                        <li><strong>Sustainable Finance Growth</strong> — Government commitment with $495.6bn cumulative total</li>
+                        <li><strong>Wealth Management Expansion</strong> — 3,300+ family offices, tax incentives, retirement planning needs</li>
+                        <li><strong>Virtual Banking Differentiation</strong> — Premier relationship model vs. digital-only competitors</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="column-title">Key Challenges</h3>
+                    <ul class="column-list challenges">
+                        <li><strong>CRE Market Pressures</strong> — Hong Kong ECL increased to $0.7bn from $0.1bn in 2024</li>
+                        <li><strong>Geopolitical Complexity</strong> — Divergent regulatory standards, $1.4bn legal provisions</li>
+                        <li><strong>Technology & Cyber Risks</strong> — AI operational risks, complex cyber threats</li>
+                        <li><strong>Interest Rate Compression</strong> — Deposit margin pressure, NII challenges</li>
+                        <li><strong>Competition Intensity</strong> — Virtual banks, fintech disruptors, fee compression</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Sustainable Finance</span>
+                        <span class="metric-trend positive">↑ 26%</span>
+                    </div>
+                    <div class="metric-value">$495.6bn</div>
+                    <div class="metric-context">Cumulative total, up from $393.6bn</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Family Offices</span>
+                        <span class="metric-trend positive">3,300+</span>
+                    </div>
+                    <div class="metric-value">HK Target</div>
+                    <div class="metric-context">Ultra-high-net-worth segment focus</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Hong Kong CRE ECL</span>
+                        <span class="metric-trend negative">↑ 600%</span>
+                    </div>
+                    <div class="metric-value">$0.7bn</div>
+                    <div class="metric-context">Requires prudent risk management</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Legal Provisions</span>
+                        <span class="metric-trend negative">$1.4bn</span>
+                    </div>
+                    <div class="metric-value">2025 Impact</div>
+                    <div class="metric-context">Regulatory compliance costs</div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 6 of 10</span>
+            </div>
+        </section>
+
+        <!-- Strategic Recommendations -->
+        <section class="slide" id="recommendations">
+            <div class="slide-header">
+                <div class="slide-label">Section 07</div>
+                <h2 class="slide-title">Strategic Recommendations</h2>
+                <p class="slide-subtitle">Product-specific and strategic initiatives for Hang Seng Bank</p>
+            </div>
+
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Product Category</th>
+                            <th>Key Recommendations</th>
+                            <th>Strategic Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Credit Cards</strong></td>
+                            <td>GBA Connect Card, Green Living Card, Digital-Only Card, Family Office Card</td>
+                            <td class="change positive">High</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Personal Loans</strong></td>
+                            <td>Budget Relief Loan, Green Renovation Loan, First Home Starter Loan</td>
+                            <td class="change positive">High</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deposits</strong></td>
+                            <td>GBA Multi-Currency Account, Green Time Deposit, Tokenized Deposit Pilot</td>
+                            <td class="change positive">High</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investments</strong></td>
+                            <td>Family Office Solution, Digital Asset Fund, GBA Equity Connect, Retirement Plus</td>
+                            <td class="change positive">Critical</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insurance</strong></td>
+                            <td>Digital Life Protection, Longevity Solutions, Cross-Border Health</td>
+                            <td class="change positive">Medium</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <h3 class="callout-title">Strategic Vision</h3>
+                <p class="callout-text">Position Hang Seng Bank as the leading relationship-driven retail and wealth management bank in Hong Kong, leveraging HSBC Group's global network while maintaining distinct local market expertise. Five strategic pillars: Customer-Centric Digital Transformation, Wealth Management Leadership, Sustainable Finance Pioneer, Greater Bay Area Bridge, and Operational Excellence.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Digital Transformation</h3>
+                    <p class="feature-text">Launch next-gen mobile app with AI personalization. Open banking APIs for ecosystem partnerships. Target: 50%+ increase in mobile engagement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3 class="feature-title">Wealth Management</h3>
+                    <p class="feature-text">Dedicated family office advisory team. Digital asset custody capabilities. Open 2-3 new Wealth Centres. Target: 15%+ wealth fee income growth.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Risk Management</h3>
+                    <p class="feature-text">Prudent CRE underwriting standards. Digital asset operational controls. Proactive regulatory compliance. Maintain RoTE above 35%.</p>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 7 of 10</span>
+            </div>
+        </section>
+
+        <!-- Implementation Roadmap -->
+        <section class="slide" id="roadmap">
+            <div class="slide-header">
+                <div class="slide-label">Section 08</div>
+                <h2 class="slide-title">Implementation Roadmap</h2>
+                <p class="slide-subtitle">Phased approach to strategic execution</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 1 — Months 1-6</div>
+                    <h3 class="timeline-title">Foundation</h3>
+                    <p class="timeline-content">Establish the infrastructure and capabilities needed for transformation</p>
+                    <ul class="timeline-list">
+                        <li>Upgrade core banking systems for digital asset readiness</li>
+                        <li>Recruit digital asset specialists and family office advisors</li>
+                        <li>Engage with HKMA and SFC on digital asset licensing</li>
+                        <li>Launch GBA multi-currency account and Green Time Deposit</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 2 — Months 6-12</div>
+                    <h3 class="timeline-title">Capability Building</h3>
+                    <p class="timeline-content">Develop and launch new products and services</p>
+                    <ul class="timeline-list">
+                        <li>Apply for digital asset dealing and custody licenses</li>
+                        <li>Launch family office services and robo-advisory platform</li>
+                        <li>Establish fintech and ecosystem partnerships</li>
+                        <li>Introduce GBA Connect Card and Green Renovation Loan</li>
+                        <li>Open 2 new Wealth Centres in strategic HK locations</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 3 — Months 12-24</div>
+                    <h3 class="timeline-title">Scale & Optimize</h3>
+                    <p class="timeline-content">Full deployment and market expansion</p>
+                    <ul class="timeline-list">
+                        <li>Full suite of digital asset products for qualified investors</li>
+                        <li>Participate in tokenized deposit pilots and CBDC initiatives</li>
+                        <li>Comprehensive sustainable finance product portfolio</li>
+                        <li>AI-powered personalized banking experience</li>
+                        <li>Achieve 15%+ growth in wealth fee income</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 8 of 10</span>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="slide" id="conclusion">
+            <div class="slide-header">
+                <div class="slide-label">Section 09</div>
+                <h2 class="slide-title">Conclusion</h2>
+                <p class="slide-subtitle">Key success factors and next steps</p>
+            </div>
+
+            <div class="callout">
+                <h3 class="callout-title">Key Takeaway</h3>
+                <p class="callout-text">The convergence of RMB internationalization, digital asset innovation, sustainable finance growth, and GBA integration creates a favorable backdrop for Hang Seng Bank's strategic expansion. Hong Kong remains the crown jewel of HSBC's operations, contributing 40% of Group profit with exceptional wealth management momentum. By executing the recommended strategies, Hang Seng Bank can strengthen its position as a leading retail and wealth management bank in Hong Kong.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Agility</h3>
+                    <p class="feature-text">Rapid adaptation to regulatory and technological changes. Proactive engagement with HKMA and SFC on digital asset frameworks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">Customer Focus</h3>
+                    <p class="feature-text">Deep understanding of evolving customer needs. HSBC Hong Kong added 1.1 million new-to-bank customers in 2025.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">Innovation</h3>
+                    <p class="feature-text">Bold experimentation with digital assets and sustainable finance. First-mover advantage in tokenized deposits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Collaboration</h3>
+                    <p class="feature-text">Strong partnerships within HSBC Group and external ecosystem. Leverage global network with local expertise.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Risk Management</h3>
+                    <p class="feature-text">Prudent risk management while pursuing growth. Maintain RoTE above 35%. Navigate CRE market pressures.</p>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stats-item">
+                    <div class="stats-value">36.6<span>bn</span></div>
+                    <div class="stats-label">Group PBT (Adjusted)</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">40<span>%</span></div>
+                    <div class="stats-label">HK Contribution</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">2.14<span>tn</span></div>
+                    <div class="stats-label">Wealth Balances</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">15<span>%</span></div>
+                    <div class="stats-label">Target Fee Growth</div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>Page 9 of 10</span>
+            </div>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="slide" id="sources" style="min-height: auto; padding-bottom: 6rem;">
+            <div class="slide-header">
+                <div class="slide-label">Appendix</div>
+                <h2 class="slide-title">Data Sources & References</h2>
+            </div>
+
+            <div class="two-columns">
+                <div class="column">
+                    <h3 class="column-title">Primary Sources</h3>
+                    <ul class="column-list">
+                        <li><strong>HSBC Holdings plc Annual Report 2025</strong><br>Pages 3, 12, 16, 18, 24, 84</li>
+                        <li><strong>Hong Kong Budget 2026-27</strong><br>Government Budget Website</li>
+                        <li><strong>HKMA Project Ensemble</strong><br>Press Release Nov 2024</li>
+                        <li><strong>SFC Digital Asset Guidelines</strong><br>Policy Statements</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="column-title">Key URLs</h3>
+                    <ul class="column-list">
+                        <li>hsbc.com/investors</li>
+                        <li>budget.gov.hk/2026</li>
+                        <li>hkma.gov.hk/Project-Ensemble</li>
+                        <li>sfc.hk/digital-assets</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout" style="margin-top: 3rem;">
+                <h3 class="callout-title">Report Information</h3>
+                <p class="callout-text">Report prepared: March 2026<br>Analysis based on HSBC 2025 Annual Report and Hong Kong Budget 2026-27<br>All financial figures verified against HSBC 2025 Annual Report pages 3, 12, 16, 18, 24, and 84<br>Target Audience: Hang Seng Bank Retail Banking and Wealth Management</p>
+            </div>
+
+            <div class="slide-footer">
+                <span class="footer-logo">HSBC 2025 Analysis</span>
+                <span>End of Presentation</span>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Slide Navigation
+        const slides = document.querySelectorAll('.slide');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const scrollDots = document.querySelectorAll('.scroll-dot');
+        const progressFill = document.getElementById('progressFill');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentSlideIndex = 0;
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navSidebar = document.querySelector('.nav-sidebar');
+
+        if (mobileToggle && navSidebar) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                navSidebar.classList.toggle('open');
+            });
+
+            // Close sidebar when clicking on a link (mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 1200) {
+                        mobileToggle.classList.remove('active');
+                        navSidebar.classList.remove('open');
+                    }
+                });
+            });
+
+            // Close sidebar when clicking outside (mobile)
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 1200 &&
+                    navSidebar.classList.contains('open') &&
+                    !navSidebar.contains(e.target) &&
+                    !mobileToggle.contains(e.target)) {
+                    mobileToggle.classList.remove('active');
+                    navSidebar.classList.remove('open');
+                }
+            });
+        }
+
+        // Intersection Observer for slide visibility
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '-10% 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    updateActiveState(entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => observer.observe(slide));
+
+        function updateActiveState(slideId) {
+            // Update nav links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${slideId}`) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update scroll dots
+            scrollDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.slide === slideId) {
+                    dot.classList.add('active');
+                }
+            });
+
+            // Update progress
+            const slideIds = Array.from(slides).map(s => s.id);
+            const index = slideIds.indexOf(slideId);
+            currentSlideIndex = index;
+            const progress = ((index + 1) / slides.length) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // Navigation functions
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlideIndex + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlideIndex - 1);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                // Update active state immediately on click
+                updateActiveState(targetId);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        scrollDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const targetId = dot.dataset.slide;
+                // Update active state immediately on click
+                updateActiveState(targetId);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateActiveState('hero');
+
+        // Animate metric cards on scroll
+        const metricCards = document.querySelectorAll('.metric-card');
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        metricCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            cardObserver.observe(card);
+        });
+    </script>
+</body>
+</html>
